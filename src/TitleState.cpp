@@ -16,11 +16,10 @@ TitleState::~TitleState()
 void TitleState::InitTexts()
 {
     title_text.setFont(*(this->font));
-    title_text.setCharacterSize(24);
+    title_text.setCharacterSize(72);
     title_text.setFillColor(sf::Color::White);
-    title_text.setPosition(sf::Vector2f(400., 200.));
     title_text.setString("Brick Pong");
-    std::cout << "??";
+    title_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 200, title_text.getLocalBounds().width));
 }
 
 void TitleState::EndState() 

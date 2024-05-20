@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CustomFunction.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\InGameState.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="src\TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CustomFunction.h" />
     <ClInclude Include="src\GameManager.h" />
     <ClInclude Include="src\header\stdafx.h" />
     <ClInclude Include="src\InGameState.h" />
