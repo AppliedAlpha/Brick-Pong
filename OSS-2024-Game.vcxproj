@@ -141,12 +141,20 @@
   <ItemGroup>
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\InGameState.cpp" />
+    <ClCompile Include="src\MapSelectState.cpp" />
+    <ClCompile Include="src\ResultState.cpp" />
     <ClCompile Include="src\State.cpp" />
+    <ClCompile Include="src\TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameManager.h" />
     <ClInclude Include="src\header\stdafx.h" />
+    <ClInclude Include="src\InGameState.h" />
+    <ClInclude Include="src\MapSelectState.h" />
+    <ClInclude Include="src\ResultState.h" />
     <ClInclude Include="src\State.h" />
+    <ClInclude Include="src\TitleState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

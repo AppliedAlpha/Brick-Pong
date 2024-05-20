@@ -3,7 +3,7 @@
 ResultState::ResultState(sf::RenderWindow* window) : State(window) 
 {
     this->font = new sf::Font();
-    this->font->loadFromFile("./Resources/Arial.ttf");
+    this->font->loadFromFile("./resources/font/Arial.ttf");
 }
 
 ResultState::~ResultState() 
