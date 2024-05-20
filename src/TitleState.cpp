@@ -16,10 +16,20 @@ TitleState::~TitleState()
 void TitleState::InitTexts()
 {
     title_text.setFont(*(this->font));
-    title_text.setCharacterSize(72);
+    title_text.setCharacterSize(88);
     title_text.setFillColor(sf::Color::White);
     title_text.setString("Brick Pong");
-    title_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 200, title_text.getLocalBounds().width));
+    title_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 150, title_text.getLocalBounds().width));
+
+    std::string menu_str[] = {"Game Start", "Setting", "Exit Game"};
+    for (int i = 0; i < 3; ++i)
+    {
+        menu_text[i].setFont(*(this->font));
+        menu_text[i].setCharacterSize(48);
+        menu_text[i].setFillColor(sf::Color::White);
+        menu_text[i].setString(menu_str[i]);
+        menu_text[i].setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 360 + 70 * i, menu_text[i].getLocalBounds().width));
+    }
 }
 
 void TitleState::EndState() 
@@ -44,4 +54,7 @@ void TitleState::Render(sf::RenderTarget* target)
 
     // 텍스트 렌더링
     target->draw(title_text);
+
+    for (int i = 0; i < 3; ++i)
+        target->draw(menu_text[i]);
 }
