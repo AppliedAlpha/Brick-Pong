@@ -1,7 +1,7 @@
 #pragma once
 #include "State.h"
 
-class MapSelectState : State
+class MapSelectState : public State
 {
 private:
 

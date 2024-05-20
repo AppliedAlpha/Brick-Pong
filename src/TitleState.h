@@ -1,7 +1,7 @@
 #pragma once
 #include "State.h"
 
-class TitleState : State
+class TitleState : public State
 {
 private:
 
