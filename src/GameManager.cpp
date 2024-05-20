@@ -1,117 +1,117 @@
 #include "GameManager.h"
 
-// ê²Œì„ ê´€ë¦¬ì ìƒì„±ì
+// °ÔÀÓ °ü¸®ÀÚ »ı¼ºÀÚ
 GameManager::GameManager() 
 {
-	// í™”ë©´ ë³€ìˆ˜ì™€ í˜„ì¬ Stateë¥¼ ì´ˆê¸°í™”í•¨
+	// È­¸é º¯¼ö¿Í ÇöÀç State¸¦ ÃÊ±âÈ­ÇÔ
 	this->InitWindow();
 	this->InitStates();
 }
 
-// ê²Œì„ ê´€ë¦¬ì ì†Œë©¸ì
+// °ÔÀÓ °ü¸®ÀÚ ¼Ò¸êÀÚ
 GameManager::~GameManager()
 {
-	// í˜„ì¬ í™”ë©´ í¬ì¸í„°ë¥¼ í• ë‹¹ í•´ì œí•¨
+	// ÇöÀç È­¸é Æ÷ÀÎÅÍ¸¦ ÇÒ´ç ÇØÁ¦ÇÔ
 	delete this->window;
 }
 
-// í™”ë©´ ë³€ìˆ˜ ì´ˆê¸°í™” í•¨ìˆ˜
+// È­¸é º¯¼ö ÃÊ±âÈ­ ÇÔ¼ö
 void GameManager::InitWindow() 
 {
-	// ê²Œì„ ì œëª©, ì°½ í¬ê¸°, ìµœëŒ€ í”„ë ˆì„, VSync ê´€ë¦¬ ë³€ìˆ˜
+	// °ÔÀÓ Á¦¸ñ, Ã¢ Å©±â, ÃÖ´ë ÇÁ·¹ÀÓ, VSync °ü¸® º¯¼ö
 	std::string title = "Brick Pong";
 	sf::VideoMode window_bounds(1280, 720);
 	unsigned int frame_rate_limit = 60;
 	bool vertical_sync_enabled = false;
 
-	// RenderWindowë¥¼ ë§Œë“¤ì–´ í™”ë©´ í¬ì¸í„°ì— í• ë‹¹í•´ì¤Œ
+	// RenderWindow¸¦ ¸¸µé¾î È­¸é Æ÷ÀÎÅÍ¿¡ ÇÒ´çÇØÁÜ
 	this->window = new sf::RenderWindow(window_bounds, title);
 	
-	// í”„ë ˆì„ ì œí•œê³¼ VSync ì†ì„±ì„ í˜„ì¬ í™”ë©´ì— ë™ê¸°í™”í•¨
+	// ÇÁ·¹ÀÓ Á¦ÇÑ°ú VSync ¼Ó¼ºÀ» ÇöÀç È­¸é¿¡ µ¿±âÈ­ÇÔ
 	this->window->setFramerateLimit(frame_rate_limit);
 	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 
-	// TODO: ì•„ì´ì½˜ ì„¤ì • ì¶”ê°€
+	// TODO: ¾ÆÀÌÄÜ ¼³Á¤ Ãß°¡
 }
 
-// State ì´ˆê¸°í™” í•¨ìˆ˜
+// State ÃÊ±âÈ­ ÇÔ¼ö
 void GameManager::InitStates()
 {
-	// State ë±ì— ìƒˆë¡œìš´ Stateë¥¼ ë„£ì–´ì¤Œ
+	// State µ¦¿¡ »õ·Î¿î State¸¦ ³Ö¾îÁÜ
 	this->states.push_front(new TitleState(this->window));
 }
 
-// í”„ë ˆì„ë§ˆë‹¤ íë¥¸ ì‹œê°(dt, deltaTime)ì„ ì—…ë°ì´íŠ¸í•´ì¤Œ
+// ÇÁ·¹ÀÓ¸¶´Ù Èå¸¥ ½Ã°¢(dt, deltaTime)À» ¾÷µ¥ÀÌÆ®ÇØÁÜ
 void GameManager::UpdateDt()
 {
 	this->dt = this->dt_clock.restart().asSeconds();
 }
 
-// SFML ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ê¸° ìœ„í•œ í•¨ìˆ˜
+// SFML ÀÌº¥Æ®¸¦ Ã³¸®ÇÏ±â À§ÇÑ ÇÔ¼ö
 void GameManager::UpdateSFMLEvents()
 {
-	// í˜„ì¬ ì°½ì—ì„œ ì´ë²¤íŠ¸ê°€ ìˆì„ ì‹œ ì‹¤í–‰
+	// ÇöÀç Ã¢¿¡¼­ ÀÌº¥Æ®°¡ ÀÖÀ» ½Ã ½ÇÇà
 	while (this->window->pollEvent(this->event))
 	{
-		// ì¢…ë£Œ ì´ë²¤íŠ¸ë¥¼ ë°›ìœ¼ë©´ í˜„ì¬ ì°½ ì¢…ë£Œ
+		// Á¾·á ÀÌº¥Æ®¸¦ ¹ŞÀ¸¸é ÇöÀç Ã¢ Á¾·á
 		if (this->event.type == sf::Event::Closed)
 			this->window->close();
 	}
 }
 
-// ë§¤ í”„ë ˆì„ë§ˆë‹¤ ì—¬ëŸ¬ ì •ë³´ë¥¼ ê³„ì‚°í•˜ê³  ê°±ì‹ í•˜ëŠ” í•¨ìˆ˜
+// ¸Å ÇÁ·¹ÀÓ¸¶´Ù ¿©·¯ Á¤º¸¸¦ °è»êÇÏ°í °»½ÅÇÏ´Â ÇÔ¼ö
 void GameManager::Update()
 {
-	// SFML ì´ë²¤íŠ¸ ì²˜ë¦¬
+	// SFML ÀÌº¥Æ® Ã³¸®
 	this->UpdateSFMLEvents();
 
-	// í˜„ì¬ State ë±ì— ë“¤ì–´ìˆëŠ” Stateê°€ ìˆë‹¤ë©´
+	// ÇöÀç State µ¦¿¡ µé¾îÀÖ´Â State°¡ ÀÖ´Ù¸é
 	if (!this->states.empty()) 
 	{
-		// í˜„ì¬ ì‹¤í–‰ë˜ëŠ” StateëŠ” ë± ê°€ì¥ ì•ì— ìˆëŠ” State ì›ì†Œ
-		// í•´ë‹¹ Stateì˜ ì •ë³´ë¥¼ í”„ë ˆì„ ë‹¨ìœ„ë¡œ ê°±ì‹ í•¨
+		// ÇöÀç ½ÇÇàµÇ´Â State´Â µ¦ °¡Àå ¾Õ¿¡ ÀÖ´Â State ¿ø¼Ò
+		// ÇØ´ç StateÀÇ Á¤º¸¸¦ ÇÁ·¹ÀÓ ´ÜÀ§·Î °»½ÅÇÔ
 		this->states.front()->Update(this->dt);
 
-		// ë§Œì•½ í˜„ì¬ ì‹¤í–‰ë˜ëŠ” Stateì—ì„œ ì¢…ë£Œ ìš”ì²­ì„ ë°›ì•˜ì„ ì‹œ
+		// ¸¸¾à ÇöÀç ½ÇÇàµÇ´Â State¿¡¼­ Á¾·á ¿äÃ»À» ¹Ş¾ÒÀ» ½Ã
 		if (this->states.front()->GetQuit())
 		{
-			// í•´ë‹¹ State ì¢…ë£Œë¥¼ ìœ„í•œ ì „ì²˜ë¦¬ ì‘ì—…ì„ í•´ì¤Œ
+			// ÇØ´ç State Á¾·á¸¦ À§ÇÑ ÀüÃ³¸® ÀÛ¾÷À» ÇØÁÜ
 			this->states.front()->EndState();
 
-			// í•´ë‹¹ Stateì˜ í¬ì¸í„°ë¥¼ í•´ì œí•˜ê³ , ë±ì—ì„œ ì œì™¸ì‹œí‚´
+			// ÇØ´ç StateÀÇ Æ÷ÀÎÅÍ¸¦ ÇØÁ¦ÇÏ°í, µ¦¿¡¼­ Á¦¿Ü½ÃÅ´
 			delete this->states.front();
 			this->states.pop_front();
 		}
 	}
 	else 
 	{
-		// ë±ì— ë‚¨ì€ Stateê°€ ì—†ë‹¤ë©´ í™”ë©´ ì¢…ë£Œ
+		// µ¦¿¡ ³²Àº State°¡ ¾ø´Ù¸é È­¸é Á¾·á
 		this->window->close();
 	}
 }
 
-// ë§¤ í”„ë ˆì„ë§ˆë‹¤ ê°±ì‹ ëœ ì •ë³´ë¥¼ ë‹¤ì‹œ í™”ë©´ì— ê·¸ë ¤ì£¼ëŠ” í•¨ìˆ˜
+// ¸Å ÇÁ·¹ÀÓ¸¶´Ù °»½ÅµÈ Á¤º¸¸¦ ´Ù½Ã È­¸é¿¡ ±×·ÁÁÖ´Â ÇÔ¼ö
 void GameManager::Render()
 {
-	// í˜„ì¬ ì°½ì— ê·¸ë ¤ì§„ ê²ƒë“¤ì„ ì‚­ì œí•¨
+	// ÇöÀç Ã¢¿¡ ±×·ÁÁø °ÍµéÀ» »èÁ¦ÇÔ
 	this->window->clear();
 
-	// í˜„ì¬ State ë±ì— ë“¤ì–´ìˆëŠ” Stateê°€ ìˆë‹¤ë©´
+	// ÇöÀç State µ¦¿¡ µé¾îÀÖ´Â State°¡ ÀÖ´Ù¸é
 	if (!this->states.empty())
-		// í˜„ì¬ ì‹¤í–‰ë˜ëŠ” Stateì˜ ì •ë³´ë¥¼ ì´ í™”ë©´ì— ê·¸ë ¤ì¤Œ
+		// ÇöÀç ½ÇÇàµÇ´Â StateÀÇ Á¤º¸¸¦ ÀÌ È­¸é¿¡ ±×·ÁÁÜ
 		this->states.front()->Render(this->window);
 
-	// ëª¨ë‘ ê·¸ë ¸ìœ¼ë©´ ê·¸ë¦° ì°½ì„ í‘œì‹œí•¨
+	// ¸ğµÎ ±×·ÈÀ¸¸é ±×¸° Ã¢À» Ç¥½ÃÇÔ
 	this->window->display();
 }
 
-// ê²Œì„ ê´€ë¦¬ì ì‹¤í–‰
+// °ÔÀÓ °ü¸®ÀÚ ½ÇÇà
 void GameManager::Run()
 {
-	// ê²Œì„ ì°½ì´ ì—´ë ¤ìˆëŠ”ë™ì•ˆ
+	// °ÔÀÓ Ã¢ÀÌ ¿­·ÁÀÖ´Âµ¿¾È
 	while (this->window->isOpen())
 	{
-		// ë§¤ í”„ë ˆì„ë§ˆë‹¤ dt ê°±ì‹ , ì—…ë°ì´íŠ¸, ê·¸ë¦¬ê¸°ë¥¼ ë°˜ë³µ í˜¸ì¶œí•¨
+		// ¸Å ÇÁ·¹ÀÓ¸¶´Ù dt °»½Å, ¾÷µ¥ÀÌÆ®, ±×¸®±â¸¦ ¹İº¹ È£ÃâÇÔ
 		this->UpdateDt();
 		this->Update();
 		this->Render();
