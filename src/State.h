@@ -16,6 +16,7 @@ public:
 	virtual ~State();
 
 	const bool& GetQuit() const;
+	virtual void CheckForQuit();
 	
 	// 순수 가상 함수 처리
 	// 모든 State들이 필수적으로 override해야 함

@@ -14,7 +14,7 @@ void TitleState::EndState() {
 }
 
 void TitleState::UpdateInput(const float& dt) {
-
+    this->CheckForQuit();
 }
 
 void TitleState::Update(const float& dt) {
@@ -22,5 +22,6 @@ void TitleState::Update(const float& dt) {
 }
 
 void TitleState::Render(sf::RenderTarget* target) {
-
+    if (!target)
+        target = this->window;
 }

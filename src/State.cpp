@@ -1,22 +1,22 @@
 #include "State.h"
 
-// State »ý¼ºÀÚ
+// State ìƒì„±ìž
 State::State(sf::RenderWindow* window) 
 {
-	// Ã¢ Æ÷ÀÎÅÍ º¯¼ö ¹× ³ª°¡±â ÇÃ·¡±× º¯¼ö ÃÊ±âÈ­
+	// ì°½ í¬ì¸í„° ë³€ìˆ˜ ë° ë‚˜ê°€ê¸° í”Œëž˜ê·¸ ë³€ìˆ˜ ì´ˆê¸°í™”
 	this->window = window;
 	this->quit = false;
 
-	// ÀÓ½Ã ÆùÆ® ÃÊ±âÈ­
+	// ìž„ì‹œ í°íŠ¸ ì´ˆê¸°í™”
 	this->font = new sf::Font();
-	// ÆùÆ® ·Îµå ½ÇÆÐ ½Ã ¹Ù·Î Á¾·á
+	// í°íŠ¸ ë¡œë“œ ì‹¤íŒ¨ ì‹œ ë°”ë¡œ ì¢…ë£Œ
 	if (!this->font->loadFromFile("./resources/font/Arial.ttf"))
 	{
 		std::cout << "[!] Font Load Failed!" << std::endl;
 		this->quit = true;
 	}
 
-	// ÀÓ½Ã ÅØ½ºÆ® ÃÊ±âÈ­, ÆùÆ® ¹× ¼Ó¼º ¼³Á¤
+	// ìž„ì‹œ í…ìŠ¤íŠ¸ ì´ˆê¸°í™”, í°íŠ¸ ë° ì†ì„± ì„¤ì •
 	this->text = new sf::Text();
 	this->text->setFont(*this->font);
 	this->text->setCharacterSize(72);
@@ -25,51 +25,58 @@ State::State(sf::RenderWindow* window)
 	this->text->setString("Brick Pong Game");
 }
 
-// State ¼Ò¸êÀÚ
+// State ì†Œë©¸ìž
 State::~State()
 {
 
 }
 
-// ÇöÀç StateÀÇ ³ª°¡±â ÇÃ·¡±× º¯¼ö »óÅÂ¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+// í˜„ìž¬ Stateì˜ ë‚˜ê°€ê¸° í”Œëž˜ê·¸ ë³€ìˆ˜ ìƒíƒœë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 const bool& State::GetQuit() const 
 {
 	return this->quit;
 }
 
-// State Á¾·á ¿äÃ»À» ¹Þ¾ÒÀ» ½Ã Á¾·á Àü ÀÛ¾÷À» ÇÏ´Â ÇÔ¼ö
+void State::CheckForQuit() {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+	{
+		this->quit = true;
+	}
+}
+
+// State ì¢…ë£Œ ìš”ì²­ì„ ë°›ì•˜ì„ ì‹œ ì¢…ë£Œ ì „ ìž‘ì—…ì„ í•˜ëŠ” í•¨ìˆ˜
 void State::EndState()
 {
 
 }
 
-// ÀÔ·ÂÀ» ¹Þ¾Æ Ã³¸®ÇÏ´Â ÇÔ¼ö
+// ìž…ë ¥ì„ ë°›ì•„ ì²˜ë¦¬í•˜ëŠ” í•¨ìˆ˜
 void State::UpdateInput(const float& dt) 
 {
-	// ¸¸¾à ESCÅ°¸¦ ´©¸¥ »óÅÂ¶ó¸é ³ª°¡±â¸¦ ¿äÃ»ÇÏµµ·Ï º¯¼ö ¼³Á¤
+	// ë§Œì•½ ESCí‚¤ë¥¼ ëˆ„ë¥¸ ìƒíƒœë¼ë©´ ë‚˜ê°€ê¸°ë¥¼ ìš”ì²­í•˜ë„ë¡ ë³€ìˆ˜ ì„¤ì •
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		this->quit = true;
 	}
 }
 
-// StateÀÇ Á¤º¸¸¦ ÇÁ·¹ÀÓ ´ÜÀ§·Î °»½ÅÇÏ´Â ÇÔ¼ö
+// Stateì˜ ì •ë³´ë¥¼ í”„ë ˆìž„ ë‹¨ìœ„ë¡œ ê°±ì‹ í•˜ëŠ” í•¨ìˆ˜
 void State::Update(const float& dt)
 {
-	// ÀÏ´Ü ÇÁ·¹ÀÓ¸¶´Ù ÀÔ·Â È®ÀÎ¸¸ ÇØÁÜ
+	// ì¼ë‹¨ í”„ë ˆìž„ë§ˆë‹¤ ìž…ë ¥ í™•ì¸ë§Œ í•´ì¤Œ
 	this->UpdateInput(dt);
 
-	// °ÔÀÓÀ» ¸¸µé¸é¼­ ÇÁ·¹ÀÓ ´ÜÀ§·Î ¼öÇàµÇ´Â ÄÚµåµéÀÌ ¿Ã °Í
+	// ê²Œìž„ì„ ë§Œë“¤ë©´ì„œ í”„ë ˆìž„ ë‹¨ìœ„ë¡œ ìˆ˜í–‰ë˜ëŠ” ì½”ë“œë“¤ì´ ì˜¬ ê²ƒ
 }
 
-// StateÀÇ °»½ÅµÈ Á¤º¸¸¦ È­¸é¿¡ ±×·ÁÁÖ´Â ÇÔ¼ö
+// Stateì˜ ê°±ì‹ ëœ ì •ë³´ë¥¼ í™”ë©´ì— ê·¸ë ¤ì£¼ëŠ” í•¨ìˆ˜
 void State::Render(sf::RenderTarget* target)
 {
-	// Ãâ·ÂÇÏ·Á´Â Ã¢ÀÌ nullÀÌ¶ó¸é ÇöÀç Ã¢À¸·Î ¼³Á¤
+	// ì¶œë ¥í•˜ë ¤ëŠ” ì°½ì´ nullì´ë¼ë©´ í˜„ìž¬ ì°½ìœ¼ë¡œ ì„¤ì •
 	if (!target)
 		target = this->window;
 
-	// Ãâ·ÂÇÏ·Á´Â Ã¢ À§¿¡ ¿©·¯ ÅØ½ºÃÄ µîÀ» È­¸é¿¡ ±×¸²
-	// ÇöÀç´Â ÀÓ½Ã ÅØ½ºÆ®¸¦ È­¸é¿¡ ±×·ÁÁÜ
+	// ì¶œë ¥í•˜ë ¤ëŠ” ì°½ ìœ„ì— ì—¬ëŸ¬ í…ìŠ¤ì³ ë“±ì„ í™”ë©´ì— ê·¸ë¦¼
+	// í˜„ìž¬ëŠ” ìž„ì‹œ í…ìŠ¤íŠ¸ë¥¼ í™”ë©´ì— ê·¸ë ¤ì¤Œ
 	target->draw(*this->text);
 }
