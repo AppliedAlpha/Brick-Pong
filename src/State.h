@@ -4,8 +4,6 @@
 class State
 {
 private:
-	sf::Font* font;
-	sf::Text* text;
 
 protected:
 	sf::RenderWindow* window;

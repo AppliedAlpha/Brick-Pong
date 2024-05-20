@@ -6,23 +6,6 @@ State::State(sf::RenderWindow* window)
 	// 창 포인터 변수 및 나가기 플래그 변수 초기화
 	this->window = window;
 	this->quit = false;
-
-	// 임시 폰트 초기화
-	this->font = new sf::Font();
-	// 폰트 로드 실패 시 바로 종료
-	if (!this->font->loadFromFile("./resources/font/Arial.ttf"))
-	{
-		std::cout << "[!] Font Load Failed!" << std::endl;
-		this->quit = true;
-	}
-
-	// 임시 텍스트 초기화, 폰트 및 속성 설정
-	this->text = new sf::Text();
-	this->text->setFont(*this->font);
-	this->text->setCharacterSize(72);
-	this->text->setPosition(sf::Vector2f(360.f, 60.f));
-	this->text->setFillColor(sf::Color::White);
-	this->text->setString("Brick Pong Game");
 }
 
 // State 소멸자
@@ -38,7 +21,8 @@ const bool& State::GetQuit() const
 }
 
 void State::CheckForQuit() {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+	// 만약 ESC키를 누른 상태라면 나가기를 요청하도록 변수 설정
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		this->quit = true;
 	}
@@ -53,11 +37,7 @@ void State::EndState()
 // 입력을 받아 처리하는 함수
 void State::UpdateInput(const float& dt) 
 {
-	// 만약 ESC키를 누른 상태라면 나가기를 요청하도록 변수 설정
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
-		this->quit = true;
-	}
+	
 }
 
 // State의 정보를 프레임 단위로 갱신하는 함수
@@ -75,8 +55,4 @@ void State::Render(sf::RenderTarget* target)
 	// 출력하려는 창이 null이라면 현재 창으로 설정
 	if (!target)
 		target = this->window;
-
-	// 출력하려는 창 위에 여러 텍스쳐 등을 화면에 그림
-	// 현재는 임시 텍스트를 화면에 그려줌
-	target->draw(*this->text);
 }
