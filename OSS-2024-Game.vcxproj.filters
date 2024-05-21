@@ -42,21 +42,6 @@
     <ClCompile Include="src\CustomFunction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\InGameState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MapSelectState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ResultState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TitleState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CustomFunction.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\Transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -77,24 +62,6 @@
     <ClInclude Include="src\State.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\InGameState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MapSelectState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ResultState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TitleState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CustomFunction.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\font\Arial.ttf" />
     <ClInclude Include="src\InGameState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>

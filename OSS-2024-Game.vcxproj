@@ -142,19 +142,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\CustomFunction.cpp" />
-    <ClCompile Include="src\CustomFunction.cpp" />
     <ClCompile Include="src\Brick.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\InGameState.cpp" />
     <ClCompile Include="src\MapSelectState.cpp" />
     <ClCompile Include="src\ResultState.cpp" />
-    <ClCompile Include="src\InGameState.cpp" />
-    <ClCompile Include="src\MapSelectState.cpp" />
-    <ClCompile Include="src\ResultState.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\State.cpp" />
-    <ClCompile Include="src\TitleState.cpp" />
     <ClCompile Include="src\TitleState.cpp" />
     <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
@@ -162,22 +157,14 @@
     <ClInclude Include="src\CustomFunction.h" />
     <ClInclude Include="src\Brick.h" />
     <ClInclude Include="src\GameObject.h" />
-    <ClInclude Include="src\CustomFunction.h" />
     <ClInclude Include="src\GameManager.h" />
     <ClInclude Include="src\header\stdafx.h" />
     <ClInclude Include="src\InGameState.h" />
     <ClInclude Include="src\MapSelectState.h" />
     <ClInclude Include="src\ResultState.h" />
     <ClInclude Include="src\Player.h" />
-    <ClInclude Include="src\InGameState.h" />
-    <ClInclude Include="src\MapSelectState.h" />
-    <ClInclude Include="src\ResultState.h" />
     <ClInclude Include="src\State.h" />
-    <ClInclude Include="src\TitleState.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\font\Arial.ttf" />
-    <ClInclude Include="src\Transform.h" />
+	<ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\TitleState.h" />
   </ItemGroup>
   <ItemGroup>
