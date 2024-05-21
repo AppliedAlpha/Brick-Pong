@@ -19,4 +19,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include "CustomFunction.h"
+
 #pragma warning(disable:4996)

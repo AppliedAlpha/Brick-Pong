@@ -4,8 +4,6 @@
 class State
 {
 private:
-	sf::Font* font;
-	sf::Text* text;
 
 protected:
 	sf::RenderWindow* window;
@@ -16,10 +14,13 @@ public:
 	virtual ~State();
 
 	const bool& GetQuit() const;
+	virtual void CheckForQuit();
 	
-	void EndState();
-	void UpdateInput(const float& dt);
-	void Update(const float& dt);
-	void Render(sf::RenderTarget* target);
+	// 순수 가상 함수 처리
+	// 모든 State들이 필수적으로 override해야 함
+	virtual void EndState() = 0;
+	virtual void UpdateInput(const float& dt) = 0;
+	virtual void Update(const float& dt) = 0;
+	virtual void Render(sf::RenderTarget* target) = 0;
 };
 
