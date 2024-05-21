@@ -1,6 +1,6 @@
 #include "Brick.h"
 
-Birck::Birck()
+Brick::Brick()
 {
 	this->transform = new Transform();
 	this->rect = new sf::RectangleShape(sf::Vector2f(50.f, 20.f));
@@ -19,13 +19,13 @@ Birck::Birck()
 	this->rect->setScale(this->transform->GetScale());
 }
 
-Birck::~Birck()
+Brick::~Brick()
 {
 	delete this->transform;
 	delete this->rect;
 }
 
-void Birck::Update(const float& dt)
+void Brick::Update(const float& dt)
 {
 	// 공과의 충돌을 검사하고, OnCollision 함수를 호출합니다.
 	if (this->CheckCollision(sf::Vector2f(0.f, 0.f), 0.f))
@@ -35,23 +35,23 @@ void Birck::Update(const float& dt)
 	}
 }
 
-void Birck::Render(sf::RenderTarget* target)
+void Brick::Render(sf::RenderTarget* target)
 {
 	target->draw(*this->rect);
 }
 
-void Birck::Clear()
+void Brick::Clear()
 {
 	for (auto& object : objects)
 	{
-		if (typeid(*object) == typeid(Birck))
+		if (typeid(*object) == typeid(Brick))
 			delete object;
 	}
 
 	objects.shrink_to_fit();
 }
 
-void Birck::OnCollision(GameObject* other)
+void Brick::OnCollision(GameObject* other)
 {
 	// 충돌이 발생했을 때 호출되는 함수입니다.
 	// 공과의 좌표 차이를 계산하여, 공의 속도를 직접 조절합니다.

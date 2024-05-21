@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include <vector>
 
-class Birck : public GameObject
+class Brick : public GameObject
 {
 protected:
 	Transform* transform;
@@ -17,10 +17,10 @@ protected:
 	/// <param name="other"></param>
 	virtual void OnCollision(GameObject* other) override;
 public:
-	Birck();
-	Birck(const Birck& object) = delete;
+	Brick();
+	Brick(const Brick& object) = delete;
 
-	virtual ~Birck();
+	virtual ~Brick();
 
 	virtual void Update(const float& dt) override;
 	virtual void Render(sf::RenderTarget* target) override;
