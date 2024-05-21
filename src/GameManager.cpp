@@ -38,7 +38,7 @@ void GameManager::InitWindow()
 void GameManager::InitStates()
 {
 	// State 덱에 새로운 State를 넣어줌
-	this->states.push_front(new State(this->window));
+	this->states.push_front(new TitleState(this->window));
 }
 
 // 프레임마다 흐른 시각(dt, deltaTime)을 업데이트해줌
