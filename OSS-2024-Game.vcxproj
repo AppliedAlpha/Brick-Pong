@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\CustomFunction.cpp" />
     <ClCompile Include="src\Brick.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\CustomFunction.h" />
     <ClInclude Include="src\Brick.h" />
     <ClInclude Include="src\GameObject.h" />
@@ -164,7 +166,7 @@
     <ClInclude Include="src\ResultState.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\State.h" />
-	<ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\TitleState.h" />
   </ItemGroup>
   <ItemGroup>
