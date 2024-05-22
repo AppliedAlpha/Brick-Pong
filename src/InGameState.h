@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include "Ball.h"
 
 class InGameState : public State
 {
@@ -10,6 +11,8 @@ public:
 	// 일단 필요하지 않을 것 같아 주석 처리
 	// sf::Texture bgTexture;
 	// sf::Sprite bgSprite;
+
+	Ball* ball;
 
 	InGameState(sf::RenderWindow* window);
 	virtual ~InGameState();

@@ -55,6 +55,7 @@ void TitleState::Update(const float& dt)
 
 void TitleState::Render(sf::RenderTarget* target) 
 {
+    // 출력 대상 미지정 시 현재 화면으로 설정
     if (!target)
         target = this->window;
 

@@ -2,6 +2,7 @@
 #include "header/stdafx.h"
 #include "State.h"
 #include "TitleState.h"
+#include "InGameState.h"
 
 class GameManager 
 {
