@@ -5,11 +5,11 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
     this->font = new sf::Font();
     this->font->loadFromFile("./resources/font/Arial.ttf");
 
-    // 공 초기화
-    this->ball = new Ball(20.f, 5.f, 1280, 720);
-
     //Score System 초기화
     this->scrSystem = new ScoreSystem();
+
+    // 공 초기화
+    this->ball = new Ball(20.f, 5.f, 1280, 720, scrSystem);
 }
 
 InGameState::~InGameState() 
@@ -32,6 +32,7 @@ void InGameState::Update(const float& dt)
 {
     // 공 움직임 처리
     this->ball->move();
+    this->ball->checkCollisionWithWall();
 }
 
 void InGameState::Render(sf::RenderTarget* target) 
