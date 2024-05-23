@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Ball.h"
+#include "ScoreSystem.h"
 
 class InGameState : public State
 {
@@ -13,9 +14,12 @@ public:
 	// sf::Sprite bgSprite;
 
 	Ball* ball;
+	ScoreSystem* scrSystem;
 
 	InGameState(sf::RenderWindow* window);
 	virtual ~InGameState();
+
+	virtual void CheckForQuit();
 
 	void EndState();
 	void UpdateInput(const float& dt);
