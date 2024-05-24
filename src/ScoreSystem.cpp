@@ -12,8 +12,7 @@ ScoreSystem::~ScoreSystem() {}
 // 점수를 재설정하는 메서드
 void ScoreSystem::ResetScore() 
 {
-	player1_score = 0;
-	player2_score = 0;
+	scores = std::make_pair(0, 0);
 }
 
 // 특정 플레이어의 점수를 반환하는 메서드
@@ -21,11 +20,11 @@ int ScoreSystem::GetScore(int player_number)
 {
 	if (player_number == 1) 
 	{
-		return player1_score;
+		return scores.first;
 	}
 	else if (player_number == 2) 
 	{
-		return player2_score;
+		return scores.second;
 	}
 	else 
 	{
@@ -36,8 +35,8 @@ int ScoreSystem::GetScore(int player_number)
 
 // 게임이 끝났는지 확인하는 메서드
 bool ScoreSystem::CheckGameFinish() {
-	if (player1_score >= winning_score) return true;
-	if (player2_score >= winning_score) return true;
+	if (scores.first >= winning_score) return true;
+	if (scores.second >= winning_score) return true;
 
 	return false;
 }
@@ -46,11 +45,11 @@ void ScoreSystem::AddScore(int player_number, int score)
 {
 	if (player_number == 1)
 	{
-		player1_score += score;
+		scores.first += score;
 	}
 	else if (player_number == 2)
 	{
-		player2_score += score;
+		scores.second += score;
 	}
 
 	CheckGameFinish();
@@ -67,11 +66,11 @@ bool ScoreSystem::IsGameFinished(int& winner)
 
 	if (ret)
 	{
-		if (player1_score >= winning_score)
+		if (scores.first >= winning_score)
 		{
 			winner = 1;
 		}
-		else if (player2_score >= winning_score)
+		else if (scores.second >= winning_score)
 		{
 			winner = 2;
 		}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "header/stdafx.h";
+#include <vector>
 
 /// <summary>
 /// Pong Game 속 두 플레이어의 점수를 계산하는 시스템입니다.
@@ -9,8 +10,7 @@
 class ScoreSystem 
 {
 private:
-	int player1_score;
-	int player2_score;
+	std::pair<int, int> scores;
 
 	const int winning_score = 5;
 
