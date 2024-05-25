@@ -3,10 +3,11 @@
 #define BALL_H
 
 #include <SFML/Graphics.hpp>
+#include "ScoreSystem.h"
 
 class Ball {
 public:
-    Ball(float radius, float initial_speed, float screen_x, float screen_y);
+    Ball(float radius, float initial_speed, float screen_x, float screen_y, ScoreSystem* scrSystem);
     void resetPosition();
     void move();
     void checkCollisionWithWall();
@@ -20,6 +21,8 @@ private:
     float speed_y;
     float screen_x;
     float screen_y;
+
+    ScoreSystem* scrSystem;
 };
 
 #endif

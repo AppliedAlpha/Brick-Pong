@@ -5,8 +5,11 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
     this->font = new sf::Font();
     this->font->loadFromFile("./resources/font/Arial.ttf");
 
+    //Score System 초기화
+    this->scrSystem = new ScoreSystem();
+
     // 공 초기화
-    this->ball = new Ball(20.f, 5.f, 1280, 720);
+    this->ball = new Ball(20.f, 5.f, 1280, 720, scrSystem);
 }
 
 InGameState::~InGameState() 
@@ -29,6 +32,7 @@ void InGameState::Update(const float& dt)
 {
     // 공 움직임 처리
     this->ball->move();
+    this->ball->checkCollisionWithWall();
 }
 
 void InGameState::Render(sf::RenderTarget* target) 
@@ -41,4 +45,17 @@ void InGameState::Render(sf::RenderTarget* target)
 
     // 화면에 공 그리기
     target->draw(this->ball->getShape());
+}
+
+void InGameState::CheckForQuit()
+{
+    //base class
+    State::CheckForQuit();
+
+    //득점 조건 달성 시 게임 종료
+    int winner_num;
+    if(scrSystem->IsGameFinished(winner_num))
+    {
+        this->quit = true;
+    }
 }

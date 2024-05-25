@@ -1,11 +1,13 @@
 #include "Ball.h"
 
 // Ball 클래스 생성자
-Ball::Ball(float radius, float initial_speed, float screen_x, float screen_y)
+Ball::Ball(float radius, float initial_speed, float screen_x, float screen_y, ScoreSystem* scrSystem)
     : initial_speed(initial_speed), screen_x(screen_x), screen_y(screen_y) {
     shape.setRadius(radius); // 공의 반지름 설정
     shape.setFillColor(sf::Color::White); // 공의 색상 설정
     resetPosition(); // 공의 초기 위치 설정
+
+    this->scrSystem = scrSystem;
 }
 
 // 공의 위치를 초기화하는 함수
@@ -26,6 +28,16 @@ void Ball::checkCollisionWithWall() {
     if (pos.y <= 0 || pos.y >= screen_y - 2 * shape.getRadius()) { // 위 또는 아래 벽과 충돌 시
         speed_y *= -1.0f; // y축 속도를 반전
     }
+
+    // 양 옆 벽과 충돌 시
+    if (pos.x <= 0 || pos.x >= screen_x - 2 * shape.getRadius()) {
+        //왼쪽 : 1, 오른쪽 : 2
+        int scoredPlayer = pos.x <= 0 ? 2 : 1;
+        this->scrSystem->AddScore(scoredPlayer);
+
+        //초기 위치로 이동
+        resetPosition();
+	}
 }
 
 // 공이 벽돌과 충돌하는지 확인하고 반응하는 함수
