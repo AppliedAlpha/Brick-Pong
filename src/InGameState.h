@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Ball.h"
+#include "Brick.h"
 #include "ScoreSystem.h"
 
 class InGameState : public State
@@ -15,6 +16,7 @@ public:
 
 	Ball* ball;
 	ScoreSystem* scrSystem;
+	std::vector<Brick*> bricks;
 
 	InGameState(sf::RenderWindow* window);
 	virtual ~InGameState();

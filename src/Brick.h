@@ -16,9 +16,13 @@ protected:
 	/// </summary>
 	/// <param name="other"></param>
 	virtual void OnCollision(GameObject* other) override;
+	
+
 public:
-	Brick();
+	Brick(float width, float height, const sf::Vector2f& position);
 	Brick(const Brick& object) = delete;
+	
+	sf::RectangleShape& getShape();
 
 	virtual ~Brick();
 
