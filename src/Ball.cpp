@@ -41,12 +41,18 @@ void Ball::checkCollisionWithWall() {
 }
 
 // 공이 벽돌과 충돌하는지 확인하고 반응하는 함수
-void Ball::checkCollisionWithBrick(const std::vector<sf::RectangleShape>& bricks) {
+void Ball::checkCollisionWithBrick(std::vector<Brick*>& bricks) {  // 메서드 정의에서 & 추가
     sf::FloatRect ballBounds = shape.getGlobalBounds(); // 공의 경계 상자 가져오기
-    for (const auto& brick : bricks) {
-        if (ballBounds.intersects(brick.getGlobalBounds())) { // 공이 벽돌과 충돌 시
+    for (auto it = bricks.begin(); it != bricks.end(); ) {
+        if (ballBounds.intersects((*it)->getShape().getGlobalBounds())) { // 공이 벽돌과 충돌 시
             speed_x *= -1.001f; // x축 속도를 약간 증가시키며 반전
-            break;
+
+            // 충돌한 벽돌 삭제
+            delete* it;
+            it = bricks.erase(it);
+        }
+        else {
+            ++it;
         }
     }
 }

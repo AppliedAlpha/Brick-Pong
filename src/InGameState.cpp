@@ -58,7 +58,8 @@ void InGameState::Update(const float& dt)
     this->ball->checkCollisionWithWall();
 
     //벽돌 구현부
-    
+    this->ball->checkCollisionWithBrick(bricks);
+        
 }
 
 void InGameState::Render(sf::RenderTarget* target) 
