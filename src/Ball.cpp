@@ -14,7 +14,7 @@ Ball::Ball(float radius, float initial_speed, float screen_x, float screen_y, Sc
 void Ball::resetPosition() {
     shape.setPosition(screen_x / 2 - shape.getRadius(), screen_y / 2 - shape.getRadius()); // 화면 중앙으로 위치 설정
     speed_x = initial_speed; // 초기 속도로 설정
-    speed_y = initial_speed; // 초기 속도로 설정
+    speed_y = 0; // 초기 속도로 설정
 }
 
 // 공을 이동시키는 함수
@@ -49,6 +49,23 @@ void Ball::checkCollisionWithBrick(const std::vector<sf::RectangleShape>& bricks
             break;
         }
     }
+}
+
+void Ball::setVelocity(float x, float y)
+{
+	speed_x = x;
+	speed_y = y;
+}
+
+void Ball::setVelocity(sf::Vector2f velocity)
+{
+	speed_x = velocity.x;
+	speed_y = velocity.y;
+}
+
+sf::Vector2f Ball::getVelocity()
+{
+	return sf::Vector2f(speed_x, speed_y);
 }
 
 // 공의 형태를 반환하는 함수
