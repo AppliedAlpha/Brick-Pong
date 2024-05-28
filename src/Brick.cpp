@@ -30,14 +30,14 @@ void Brick::Update(const float& dt)
 	// 공과의 충돌을 검사하고, OnCollision 함수를 호출합니다.
 	if (this->CheckCollision(sf::Vector2f(0.f, 0.f), 0.f))
 	{
-		this->OnCollision(this);
-		delete this;
+		//this->OnCollision(this);
+		//delete this;
 	}
 }
 
-void Brick::Render(sf::RenderTarget* target)
+sf::RectangleShape* Brick::GetDrawable()
 {
-	target->draw(*this->rect);
+	return this->rect;
 }
 
 void Brick::Clear()
@@ -51,7 +51,7 @@ void Brick::Clear()
 	objects.shrink_to_fit();
 }
 
-void Brick::OnCollision(GameObject* other)
+void Brick::OnCollision(Ball* other)
 {
 	// 충돌이 발생했을 때 호출되는 함수입니다.
 	// 공과의 좌표 차이를 계산하여, 공의 속도를 직접 조절합니다.
