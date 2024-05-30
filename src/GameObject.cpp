@@ -56,12 +56,6 @@ void GameObject::Clear()
 	}
 }
 
-void GameObject::OnCollision(Ball* other)
-{
-	// 게임 오브젝트가 충돌했을 때 호출되는 함수입니다.
-	// 이 함수는 파생 클래스에서 오버라이드하여 사용합니다.
-}
-
 bool GameObject::CheckCollision(sf::Vector2f otherPos, float radius) {
 	// rect의 위치와 크기 정보를 가져옵니다.
 	sf::Vector2f rectPos = this->rect->getPosition();
