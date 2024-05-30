@@ -21,6 +21,8 @@ InGameState::~InGameState()
 {
     delete this->font;
     delete this->ball;
+
+    delete this->scrSystem;
 }
 
 void InGameState::EndState() 
@@ -35,6 +37,8 @@ void InGameState::UpdateInput(const float& dt)
 
 void InGameState::Update(const float& dt) 
 {
+    this->CheckForQuit();
+
     // 공 움직임 처리
     this->ball->move();
     this->ball->checkCollisionWithWall();
@@ -74,8 +78,10 @@ void InGameState::CheckForQuit()
 
     //득점 조건 달성 시 게임 종료
     int winner_num;
-    if(scrSystem->IsGameFinished(winner_num))
+
+    if (scrSystem->IsGameFinished(winner_num))
     {
         this->quit = true;
+        std::cout << winner_num;
     }
 }
