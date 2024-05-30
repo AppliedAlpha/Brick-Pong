@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "ScoreSystem.h"
+#include "Brick.h"
 
 class Ball {
 public:
@@ -11,7 +12,7 @@ public:
     void resetPosition();
     void move();
     void checkCollisionWithWall();
-    void checkCollisionWithBrick(const std::vector<sf::RectangleShape>& bricks);
+    void checkCollisionWithBrick(std::vector<Brick*>& bricks);
 	void setVelocity(float x, float y);
 	void setVelocity(sf::Vector2f velocity);
 	sf::Vector2f getVelocity();

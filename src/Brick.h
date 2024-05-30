@@ -13,8 +13,10 @@ protected:
 	sf::RectangleShape* rect;
 
 public:
-	Brick();
+	Brick(float width, float height, const sf::Vector2f& position);
 	Brick(const Brick& object) = delete;
+	
+	sf::RectangleShape& getShape();
 
 	virtual ~Brick();
 
@@ -24,7 +26,7 @@ public:
 	static void Clear();
 
 	/// <summary>
-	/// °ø°úÀÇ Ãæµ¹ÀÌ ¹ß»ıÇßÀ» ¶§ ÇØ´ç ÇÔ¼ö°¡ È£ÃâµË´Ï´Ù.
+	/// ê³µê³¼ì˜ ì¶©ëŒì´ ë°œìƒí–ˆì„ ë•Œ í•´ë‹¹ í•¨ìˆ˜ê°€ í˜¸ì¶œë©ë‹ˆë‹¤.
 	/// </summary>
 	/// <param name="other"></param>
 	virtual void OnCollision(Ball* other) override;
