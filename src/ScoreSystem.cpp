@@ -35,10 +35,7 @@ int ScoreSystem::GetScore(int player_number)
 
 // 게임이 끝났는지 확인하는 메서드
 bool ScoreSystem::CheckGameFinish() {
-	if (scores.first >= winning_score) return true;
-	if (scores.second >= winning_score) return true;
-
-	return false;
+	return std::max(scores.first, scores.second) >= winning_score;
 }
 
 void ScoreSystem::AddScore(int player_number, int score)
