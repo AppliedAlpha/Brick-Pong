@@ -52,6 +52,6 @@ public:
 	/// 공과의 충돌이 발생했을 때 해당 함수가 호출됩니다.
 	/// </summary>
 	/// <param name="other"></param>
-	virtual void OnCollision(Ball* other) override;
+	void OnCollision(Ball* other);
 	void ClearCollisionTrigger();
 };
