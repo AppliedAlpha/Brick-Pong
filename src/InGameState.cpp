@@ -5,13 +5,13 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
     this->font = new sf::Font();
     this->font->loadFromFile("./resources/font/Arial.ttf");
 
-    //Score System ÃÊ±âÈ­
+    //Score System ï¿½Ê±ï¿½È­
     this->scrSystem = new ScoreSystem();
 
-    // °ø ÃÊ±âÈ­
+    // ï¿½ï¿½ ï¿½Ê±ï¿½È­
     this->ball = new Ball(20.f, 5.f, 1280, 720, scrSystem);
 
-	// GameObjects ÃÊ±âÈ­
+	// GameObjects ï¿½Ê±ï¿½È­
 
 	this->player1 = new Player();
 
@@ -25,7 +25,7 @@ InGameState::~InGameState()
     delete this->scrSystem;
 }
 
-void InGameState::EndState() 
+int InGameState::EndState() 
 {
 
 }
@@ -39,14 +39,14 @@ void InGameState::Update(const float& dt)
 {
     this->CheckForQuit();
 
-    // °ø ¿òÁ÷ÀÓ Ã³¸®
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
     this->ball->move();
     this->ball->checkCollisionWithWall();
 
-    // ÇÃ·¹ÀÌ¾î
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½
 	player1->Update(dt);
 
-	// °øÀÇ global bounds¿Í playerÀÇ Ãæµ¹ È®ÀÎ
+	// ï¿½ï¿½ï¿½ï¿½ global boundsï¿½ï¿½ playerï¿½ï¿½ ï¿½æµ¹ È®ï¿½ï¿½
 	if (this->ball->getShape().getGlobalBounds().intersects(this->player1->GetDrawable()->getGlobalBounds()))
 	{
 		this->player1->OnCollision(ball);
@@ -59,13 +59,13 @@ void InGameState::Update(const float& dt)
 
 void InGameState::Render(sf::RenderTarget* target) 
 {
-    // Ãâ·Â ´ë»ó ¹ÌÁöÁ¤ ½Ã ÇöÀç È­¸éÀ¸·Î ¼³Á¤
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     if (!target)
         target = this->window;
 
-    // target->draw(´ë»ó); À¸·Î ·»´õ¸µÇÏ±æ ±ÇÀåÇÕ´Ï´Ù.
+    // target->draw(ï¿½ï¿½ï¿½); ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 
-    // È­¸é¿¡ °ø ±×¸®±â
+    // È­ï¿½é¿¡ ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
     target->draw(this->ball->getShape());
 
     target->draw(*this->player1->GetDrawable());
@@ -76,7 +76,7 @@ void InGameState::CheckForQuit()
     //base class
     State::CheckForQuit();
 
-    //µæÁ¡ Á¶°Ç ´Þ¼º ½Ã °ÔÀÓ Á¾·á
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     int winner_num;
 
     if (scrSystem->IsGameFinished(winner_num))

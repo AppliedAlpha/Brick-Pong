@@ -77,7 +77,7 @@ void GameManager::Update()
 		if (this->states.front()->GetQuit())
 		{
 			// 해당 State 종료를 위한 전처리 작업을 해줌
-			this->states.front()->EndState();
+			int res = this->states.front()->EndState();
 
 			// 해당 State의 포인터를 해제하고, 덱에서 제외시킴
 			delete this->states.front();

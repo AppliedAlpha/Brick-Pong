@@ -32,7 +32,7 @@ void ResultState::InitTexts()
     }
 }
 
-void ResultState::EndState() 
+int ResultState::EndState() 
 {
 
 }

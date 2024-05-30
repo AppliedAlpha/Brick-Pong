@@ -29,7 +29,7 @@ void State::CheckForQuit() {
 }
 
 // State 종료 요청을 받았을 시 종료 전 작업을 하는 함수
-void State::EndState()
+int State::EndState()
 {
 
 }

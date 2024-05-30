@@ -38,7 +38,7 @@ void TitleState::InitTexts()
     }
 }
 
-void TitleState::EndState() 
+int TitleState::EndState() 
 {
 
 }
