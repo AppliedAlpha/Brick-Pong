@@ -45,12 +45,12 @@ void TitleState::EndState()
 
 void TitleState::UpdateInput(const float& dt) 
 {
-    this->CheckForQuit();
+    
 }
 
 void TitleState::Update(const float& dt) 
 {
-
+    this->CheckForQuit();
 }
 
 void TitleState::Render(sf::RenderTarget* target) 

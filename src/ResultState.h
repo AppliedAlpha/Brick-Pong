@@ -11,8 +11,14 @@ public:
 	// sf::Texture bgTexture;
 	// sf::Sprite bgSprite;
 
-	ResultState(sf::RenderWindow* window);
+	sf::Text result_text;
+	sf::Text menu_text[2];
+	int winner_num;
+
+	ResultState(sf::RenderWindow* window, int winner);
 	virtual ~ResultState();
+
+	void InitTexts();
 
 	void EndState();
 	void UpdateInput(const float& dt);
