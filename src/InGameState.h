@@ -20,6 +20,8 @@ public:
 	Player* player1;
 	Player* player2;
 
+	int winner_num = -1;
+
 	InGameState(sf::RenderWindow* window);
 	virtual ~InGameState();
 

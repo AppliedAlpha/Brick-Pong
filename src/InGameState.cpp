@@ -27,7 +27,7 @@ InGameState::~InGameState()
 
 int InGameState::EndState() 
 {
-
+    return this->winner_num;
 }
 
 void InGameState::UpdateInput(const float& dt) 
@@ -77,11 +77,11 @@ void InGameState::CheckForQuit()
     State::CheckForQuit();
 
     //���� ���� �޼� �� ���� ����
-    int winner_num;
+    int winner;
 
-    if (scrSystem->IsGameFinished(winner_num))
+    if (scrSystem->IsGameFinished(winner))
     {
+        this->winner_num = winner;
         this->quit = true;
-        std::cout << winner_num;
     }
 }
