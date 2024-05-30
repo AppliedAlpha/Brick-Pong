@@ -11,9 +11,9 @@ MapSelectState::~MapSelectState()
     delete this->font;
 }
 
-void MapSelectState::EndState() 
+int MapSelectState::EndState() 
 {
-
+    return 0;
 }
 
 void MapSelectState::UpdateInput(const float& dt) 

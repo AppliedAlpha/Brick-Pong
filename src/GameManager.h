@@ -3,6 +3,7 @@
 #include "State.h"
 #include "TitleState.h"
 #include "InGameState.h"
+#include "ResultState.h"
 
 class GameManager 
 {

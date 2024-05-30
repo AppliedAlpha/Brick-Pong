@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Ball.h"
+#include "Brick.h"
 #include "ScoreSystem.h"
 #include "Player.h"
 #include "GameObject.h"
@@ -17,15 +18,18 @@ public:
 
 	Ball* ball;
 	ScoreSystem* scrSystem;
+	std::vector<Brick*> bricks;
 	Player* player1;
 	Player* player2;
+
+	int winner_num = -1;
 
 	InGameState(sf::RenderWindow* window);
 	virtual ~InGameState();
 
 	virtual void CheckForQuit();
 
-	void EndState();
+	int EndState();
 	void UpdateInput(const float& dt);
 	void Update(const float& dt);
 	void Render(sf::RenderTarget* target);

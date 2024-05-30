@@ -1,7 +1,6 @@
 #pragma once
 #include "header/stdafx.h"
 #include "Transform.h"
-#include "Ball.h"
 #include <vector>
 
 class GameObject
@@ -25,10 +24,4 @@ public:
 
 	virtual sf::RectangleShape* GetDrawable();
 	static void Clear();
-
-	/// <summary>
-	/// 공과의 충돌이 발생했을 때 해당 함수가 호출됩니다.
-	/// </summary>
-	/// <param name="other"></param>
-	virtual void OnCollision(Ball* other);
 };
