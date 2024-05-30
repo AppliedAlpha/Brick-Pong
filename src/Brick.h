@@ -3,6 +3,7 @@
 #include "header/stdafx.h"
 #include "Transform.h"
 #include "GameObject.h"
+#include "Ball.h"
 #include <vector>
 
 class Brick : public GameObject
@@ -10,13 +11,6 @@ class Brick : public GameObject
 protected:
 	Transform* transform;
 	sf::RectangleShape* rect;
-
-	/// <summary>
-	/// °ø°úÀÇ Ãæµ¹ÀÌ ¹ß»ıÇßÀ» ¶§ ÇØ´ç ÇÔ¼ö°¡ È£ÃâµË´Ï´Ù.
-	/// </summary>
-	/// <param name="other"></param>
-	virtual void OnCollision(GameObject* other) override;
-	
 
 public:
 	Brick(float width, float height, const sf::Vector2f& position);
@@ -27,6 +21,13 @@ public:
 	virtual ~Brick();
 
 	virtual void Update(const float& dt) override;
-	virtual void Render(sf::RenderTarget* target) override;
+	virtual sf::RectangleShape* GetDrawable() override;
+
 	static void Clear();
+
+	/// <summary>
+	/// ê³µê³¼ì˜ ì¶©ëŒì´ ë°œìƒí–ˆì„ ë•Œ í•´ë‹¹ í•¨ìˆ˜ê°€ í˜¸ì¶œë©ë‹ˆë‹¤.
+	/// </summary>
+	/// <param name="other"></param>
+	virtual void OnCollision(Ball* other) override;
 };

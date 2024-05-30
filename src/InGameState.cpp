@@ -5,13 +5,13 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
     this->font = new sf::Font();
     this->font->loadFromFile("./resources/font/Arial.ttf");
 
-    //Score System ÃÊ±âÈ­
+    //Score System ì´ˆê¸°í™”
     this->scrSystem = new ScoreSystem();
 
-    // °ø ÃÊ±âÈ­
+    // ê³µ ì´ˆê¸°í™”
     this->ball = new Ball(20.f, 5.f, 1280, 720, scrSystem);
     
-    //º®µ¹ ÃÊ±âÈ­
+    //ë²½ëŒ ì´ˆê¸°í™”
     int rows = 8;
     int bricks_per_row = 3;
     float Brick_x = 30.0f;
@@ -28,6 +28,10 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
             bricks.push_back(new Brick(Brick_x, Brick_y, sf::Vector2f(x, y)));
         }
     }
+
+	// GameObjects ì´ˆê¸°í™”
+
+	this->player1 = new Player();
 
 }
 
@@ -48,36 +52,47 @@ void InGameState::EndState()
 
 void InGameState::UpdateInput(const float& dt) 
 {
-
+    player1->UpdateInput(dt);
 }
 
 void InGameState::Update(const float& dt) 
 {
-    // °ø ¿òÁ÷ÀÓ Ã³¸®
+    // ê³µ ì›€ì§ìž„ ì²˜ë¦¬
     this->ball->move();
     this->ball->checkCollisionWithWall();
 
-    //º®µ¹ ±¸ÇöºÎ
+    //ë²½ëŒ êµ¬í˜„ë¶€
     this->ball->checkCollisionWithBrick(bricks);
         
+    // í”Œë ˆì´ì–´
+	player1->Update(dt);
+
+	// ê³µì˜ global boundsì™€ playerì˜ ì¶©ëŒ í™•ì¸
+	if (this->ball->getShape().getGlobalBounds().intersects(this->player1->GetDrawable()->getGlobalBounds()))
+	{
+		this->player1->OnCollision(ball);
+	}
+    else
+	{
+		this->player1->ClearCollisionTrigger();
+	}
 }
 
 void InGameState::Render(sf::RenderTarget* target) 
 {
-    // Ãâ·Â ´ë»ó ¹ÌÁöÁ¤ ½Ã ÇöÀç È­¸éÀ¸·Î ¼³Á¤
+    // ì¶œë ¥ ëŒ€ìƒ ë¯¸ì§€ì • ì‹œ í˜„ìž¬ í™”ë©´ìœ¼ë¡œ ì„¤ì •
     if (!target)
         target = this->window;
 
-    // target->draw(´ë»ó); À¸·Î ·»´õ¸µÇÏ±æ ±ÇÀåÇÕ´Ï´Ù.
+    // target->draw(ëŒ€ìƒ); ìœ¼ë¡œ ë Œë”ë§í•˜ê¸¸ ê¶Œìž¥í•©ë‹ˆë‹¤.
 
-    // È­¸é¿¡ °ø ±×¸®±â
+    // í™”ë©´ì— ê³µ ê·¸ë¦¬ê¸°
     target->draw(this->ball->getShape());
 
     for (auto& brick : bricks) {
         target->draw(brick->getShape());
     }
-
-
+    target->draw(*this->player1->GetDrawable());
 }
 
 void InGameState::CheckForQuit()
@@ -85,7 +100,7 @@ void InGameState::CheckForQuit()
     //base class
     State::CheckForQuit();
 
-    //µæÁ¡ Á¶°Ç ´Þ¼º ½Ã °ÔÀÓ Á¾·á
+    //ë“ì  ì¡°ê±´ ë‹¬ì„± ì‹œ ê²Œìž„ ì¢…ë£Œ
     int winner_num;
     if(scrSystem->IsGameFinished(winner_num))
     {

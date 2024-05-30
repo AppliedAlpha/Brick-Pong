@@ -3,6 +3,8 @@
 #include "Ball.h"
 #include "Brick.h"
 #include "ScoreSystem.h"
+#include "Player.h"
+#include "GameObject.h"
 
 class InGameState : public State
 {
@@ -17,6 +19,8 @@ public:
 	Ball* ball;
 	ScoreSystem* scrSystem;
 	std::vector<Brick*> bricks;
+	Player* player1;
+	Player* player2;
 
 	InGameState(sf::RenderWindow* window);
 	virtual ~InGameState();
