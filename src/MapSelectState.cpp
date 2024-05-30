@@ -13,7 +13,7 @@ MapSelectState::~MapSelectState()
 
 int MapSelectState::EndState() 
 {
-
+    return 0;
 }
 
 void MapSelectState::UpdateInput(const float& dt) 

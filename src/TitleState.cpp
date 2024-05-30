@@ -40,7 +40,7 @@ void TitleState::InitTexts()
 
 int TitleState::EndState() 
 {
-
+    return 0;
 }
 
 void TitleState::UpdateInput(const float& dt) 

@@ -34,6 +34,7 @@ void ResultState::InitTexts()
 
 int ResultState::EndState() 
 {
+    return 0;
 }
 
 void ResultState::UpdateInput(const float& dt) 

@@ -31,7 +31,7 @@ void State::CheckForQuit() {
 // State 종료 요청을 받았을 시 종료 전 작업을 하는 함수
 int State::EndState()
 {
-
+	return 0;
 }
 
 // 입력을 받아 처리하는 함수
