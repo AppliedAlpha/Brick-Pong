@@ -102,8 +102,8 @@ void InGameState::CheckForQuit()
     State::CheckForQuit();
 
     //득점 조건 달성 시 게임 종료
-    int winner_num;
-    if(scrSystem->IsGameFinished(winner_num))
+    int winner;
+    if(scrSystem->IsGameFinished(winner))
     {
         this->winner_num = winner;
         this->quit = true;
