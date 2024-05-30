@@ -57,6 +57,8 @@ void InGameState::UpdateInput(const float& dt)
 
 void InGameState::Update(const float& dt) 
 {
+    // 게임 종료 확인
+    this->CheckForQuit();
 
     // 공 움직임 처리
     this->ball->move();
