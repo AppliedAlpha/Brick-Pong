@@ -10,6 +10,11 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
 
     // 공 초기화
     this->ball = new Ball(20.f, 5.f, 1280, 720, scrSystem);
+
+	// GameObjects 초기화
+
+	this->player1 = new Player();
+
 }
 
 InGameState::~InGameState() 
@@ -25,7 +30,7 @@ void InGameState::EndState()
 
 void InGameState::UpdateInput(const float& dt) 
 {
-
+    player1->UpdateInput(dt);
 }
 
 void InGameState::Update(const float& dt) 
@@ -33,6 +38,19 @@ void InGameState::Update(const float& dt)
     // 공 움직임 처리
     this->ball->move();
     this->ball->checkCollisionWithWall();
+
+    // 플레이어
+	player1->Update(dt);
+
+	// 공의 global bounds와 player의 충돌 확인
+	if (this->ball->getShape().getGlobalBounds().intersects(this->player1->GetDrawable()->getGlobalBounds()))
+	{
+		this->player1->OnCollision(ball);
+	}
+    else
+	{
+		this->player1->ClearCollisionTrigger();
+	}
 }
 
 void InGameState::Render(sf::RenderTarget* target) 
@@ -45,6 +63,8 @@ void InGameState::Render(sf::RenderTarget* target)
 
     // 화면에 공 그리기
     target->draw(this->ball->getShape());
+
+    target->draw(*this->player1->GetDrawable());
 }
 
 void InGameState::CheckForQuit()

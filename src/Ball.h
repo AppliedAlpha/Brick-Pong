@@ -12,6 +12,9 @@ public:
     void move();
     void checkCollisionWithWall();
     void checkCollisionWithBrick(const std::vector<sf::RectangleShape>& bricks);
+	void setVelocity(float x, float y);
+	void setVelocity(sf::Vector2f velocity);
+	sf::Vector2f getVelocity();
     sf::CircleShape& getShape();
 
 private:

@@ -35,16 +35,6 @@ GameObject::~GameObject()
 	objects.erase(std::remove(objects.begin(), objects.end(), this), objects.end());
 }
 
-void GameObject::Render(sf::RenderTarget* target)
-{
-	// 게임 오브젝트의 텍스처를 transform에 기반하여 렌더링합니다.
-	this->rect->setPosition(this->transform->GetPosition());
-	this->rect->setScale(this->transform->GetScale());
-	this->rect->setRotation(this->transform->GetRotation());
-
-	target->draw(*this->rect);
-}
-
 void GameObject::Clear()
 {
 	// 생성된 모든 게임 오브젝트를 삭제합니다.
@@ -66,7 +56,7 @@ void GameObject::Clear()
 	}
 }
 
-void GameObject::OnCollision(GameObject* other)
+void GameObject::OnCollision(Ball* other)
 {
 	// 게임 오브젝트가 충돌했을 때 호출되는 함수입니다.
 	// 이 함수는 파생 클래스에서 오버라이드하여 사용합니다.
@@ -97,4 +87,16 @@ bool GameObject::CheckCollision(sf::Vector2f otherPos, float radius) {
 
 	// 거리가 반지름보다 작거나 같으면 충돌합니다.
 	return distance <= radius;
+}
+
+sf::RectangleShape* GameObject::GetDrawable()
+{
+	// 게임 오브젝트의 텍스처를 반환합니다.
+	return this->rect;
+}
+
+void GameObject::UpdateInput(const float& dt)
+{
+	// 게임 오브젝트의 입력을 업데이트합니다.
+	// 이 함수는 파생 클래스에서 오버라이드하여 사용합니다.
 }
