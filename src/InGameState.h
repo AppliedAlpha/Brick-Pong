@@ -22,12 +22,14 @@ public:
 	Player* player1;
 	Player* player2;
 
+	int winner_num = -1;
+
 	InGameState(sf::RenderWindow* window);
 	virtual ~InGameState();
 
 	virtual void CheckForQuit();
 
-	void EndState();
+	int EndState();
 	void UpdateInput(const float& dt);
 	void Update(const float& dt);
 	void Render(sf::RenderTarget* target);

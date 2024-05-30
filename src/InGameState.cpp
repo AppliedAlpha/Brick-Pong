@@ -29,8 +29,8 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
         }
     }
 
-	// GameObjects 초기화
 
+	// GameObjects 초기화
 	this->player1 = new Player();
 
 }
@@ -45,9 +45,9 @@ InGameState::~InGameState()
     }
 }
 
-void InGameState::EndState() 
+int InGameState::EndState() 
 {
-
+    return this->winner_num;
 }
 
 void InGameState::UpdateInput(const float& dt) 
@@ -57,6 +57,7 @@ void InGameState::UpdateInput(const float& dt)
 
 void InGameState::Update(const float& dt) 
 {
+
     // 공 움직임 처리
     this->ball->move();
     this->ball->checkCollisionWithWall();
@@ -104,6 +105,7 @@ void InGameState::CheckForQuit()
     int winner_num;
     if(scrSystem->IsGameFinished(winner_num))
     {
+        this->winner_num = winner;
         this->quit = true;
     }
 }

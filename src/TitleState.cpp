@@ -38,19 +38,19 @@ void TitleState::InitTexts()
     }
 }
 
-void TitleState::EndState() 
+int TitleState::EndState() 
 {
-
+    return 0;
 }
 
 void TitleState::UpdateInput(const float& dt) 
 {
-    this->CheckForQuit();
+    
 }
 
 void TitleState::Update(const float& dt) 
 {
-
+    this->CheckForQuit();
 }
 
 void TitleState::Render(sf::RenderTarget* target) 

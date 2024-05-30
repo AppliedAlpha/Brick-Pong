@@ -14,7 +14,7 @@ public:
 	MapSelectState(sf::RenderWindow* window);
 	virtual ~MapSelectState();
 
-	void EndState();
+	int EndState();
 	void UpdateInput(const float& dt);
 	void Update(const float& dt);
 	void Render(sf::RenderTarget* target);

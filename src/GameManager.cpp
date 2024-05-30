@@ -77,7 +77,14 @@ void GameManager::Update()
 		if (this->states.front()->GetQuit())
 		{
 			// 해당 State 종료를 위한 전처리 작업을 해줌
-			this->states.front()->EndState();
+			int res = this->states.front()->EndState();
+
+			// 종료된 State가 InGameState라면
+			if (InGameState* inGameState = dynamic_cast<InGameState *>(this->states.front()))
+			{
+				// 종료 코드에서 받아온 승자를 ResultState로 넘김 
+				this->states.push_back(new ResultState(this->window, res));
+			}
 
 			// 해당 State의 포인터를 해제하고, 덱에서 제외시킴
 			delete this->states.front();

@@ -29,9 +29,9 @@ void State::CheckForQuit() {
 }
 
 // State 종료 요청을 받았을 시 종료 전 작업을 하는 함수
-void State::EndState()
+int State::EndState()
 {
-
+	return 0;
 }
 
 // 입력을 받아 처리하는 함수
@@ -43,6 +43,9 @@ void State::UpdateInput(const float& dt)
 // State의 정보를 프레임 단위로 갱신하는 함수
 void State::Update(const float& dt)
 {
+	// 업데이트마다 현재 State를 종료해야 하는 지 체크 
+	this->CheckForQuit();
+
 	// 일단 프레임마다 입력 확인만 해줌
 	this->UpdateInput(dt);
 
