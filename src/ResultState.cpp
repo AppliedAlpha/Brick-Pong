@@ -18,7 +18,7 @@ void ResultState::InitTexts()
     result_text.setFont(*(this->font));
     result_text.setCharacterSize(88);
     result_text.setFillColor(sf::Color::White);
-    result_text.setString("Player X Wins");
+    result_text.setString("Player " + std::to_string(this->winner_num) + "Wins");
     result_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 150, result_text.getLocalBounds().width));
 
     std::string menu_str[] = {"Retry", "Back to Menu"};
@@ -34,7 +34,6 @@ void ResultState::InitTexts()
 
 int ResultState::EndState() 
 {
-
 }
 
 void ResultState::UpdateInput(const float& dt) 

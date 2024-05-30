@@ -11,7 +11,7 @@ MapSelectState::~MapSelectState()
     delete this->font;
 }
 
-void MapSelectState::EndState() 
+int MapSelectState::EndState() 
 {
 
 }

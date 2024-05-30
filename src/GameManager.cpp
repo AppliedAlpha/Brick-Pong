@@ -82,7 +82,7 @@ void GameManager::Update()
 			// 종료된 State가 InGameState라면
 			if (InGameState* inGameState = dynamic_cast<InGameState *>(this->states.front()))
 			{
-				// 종료 코드에서 받아온 승자를 ResultState로 넘김
+				// 종료 코드에서 받아온 승자를 ResultState로 넘김 
 				this->states.push_back(new ResultState(this->window, res));
 			}
 
