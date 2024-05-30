@@ -2,8 +2,6 @@
 
 Brick::Brick::Brick(float width, float height, const sf::Vector2f& position)
 {
-
-
 	this->transform = new Transform();
 	this->rect = new sf::RectangleShape(sf::Vector2f(width, height));//50.0f, 20.0f
 
@@ -48,12 +46,6 @@ void Brick::Clear()
 	}
 
 	objects.shrink_to_fit();
-}
-
-void Brick::OnCollision(Ball* other)
-{
-	// 충돌이 발생했을 때 호출되는 함수입니다.
-	// 공과의 좌표 차이를 계산하여, 공의 속도를 직접 조절합니다.
 }
 
 sf::RectangleShape& Brick::getShape() {
