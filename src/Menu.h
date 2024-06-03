@@ -1,10 +1,10 @@
 
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <vector>
+#include "header/stdafx.h"
 
 class Menu {
 public:
+    Menu(std::vector<std::string> vec);
     Menu(float width, float height);
     ~Menu();
 
@@ -13,9 +13,9 @@ public:
     void moveDown();
     int getSelectedIndex() { return selectedIndex; }
 
+    std::vector<sf::Text*> menu;
+
 private:
-    int selectedIndex;
-    sf::Font font;
-    sf::Text title;  // 제목 텍스트 추가
-    std::vector<sf::Text> menu;
+    int selectedIndex = 0;
+    sf::Font* font;
 };

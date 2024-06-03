@@ -26,16 +26,8 @@ void TitleState::InitTexts()
     title_text.setString("Brick Pong");
     title_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 150, title_text.getLocalBounds().width));
 
-    // 메뉴 텍스트 설정
-    std::string menu_str[] = {"Game Start", "Setting", "Exit Game"};
-    for (int i = 0; i < 3; ++i)
-    {
-        menu_text[i].setFont(*(this->font));
-        menu_text[i].setCharacterSize(48);
-        menu_text[i].setFillColor(sf::Color::White);
-        menu_text[i].setString(menu_str[i]);
-        menu_text[i].setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 360 + 70 * i, menu_text[i].getLocalBounds().width));
-    }
+    std::vector<std::string> menu_text = {"Game Start", "Setting", "Exit Game"};
+    title_menu = new Menu(menu_text);
 }
 
 int TitleState::EndState() 
@@ -62,6 +54,6 @@ void TitleState::Render(sf::RenderTarget* target)
     // 텍스트 렌더링
     target->draw(title_text);
 
-    for (int i = 0; i < 3; ++i)
-        target->draw(menu_text[i]);
+    for (auto menu_text : this->title_menu->menu)
+        target->draw(*menu_text);
 }

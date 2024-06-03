@@ -39,7 +39,7 @@ void GameManager::InitStates()
 {
 	// State 덱에 새로운 State를 넣어줌
 	// TODO: InGameState 테스트 종료 시 TitleState로 변경
-	this->states.push_front(new InGameState(this->window));
+	this->states.push_front(new TitleState(this->window));
 }
 
 // 프레임마다 흐른 시각(dt, deltaTime)을 업데이트해줌
