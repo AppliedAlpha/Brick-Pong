@@ -1,14 +1,12 @@
-
 #pragma once
 #include "header/stdafx.h"
 
 class Menu {
 public:
     Menu(std::vector<std::string> vec);
-    Menu(float width, float height);
     ~Menu();
 
-    void draw(sf::RenderWindow& window);
+    void updateInput(const float& dt);
     void moveUp();
     void moveDown();
     int getSelectedIndex() { return selectedIndex; }
@@ -17,5 +15,7 @@ public:
 
 private:
     int selectedIndex = 0;
+    float coolDown = 0.1f;
+    const float inputDelay = 0.1f;
     sf::Font* font;
 };

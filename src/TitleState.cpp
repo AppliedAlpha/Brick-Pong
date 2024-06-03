@@ -37,11 +37,12 @@ int TitleState::EndState()
 
 void TitleState::UpdateInput(const float& dt) 
 {
-    
+    this->title_menu->updateInput(dt);
 }
 
 void TitleState::Update(const float& dt) 
 {
+    this->UpdateInput(dt);
     this->CheckForQuit();
 }
 
