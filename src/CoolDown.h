@@ -4,15 +4,15 @@
 class CoolDown
 {
 public:
-    CoolDown(float delay);
+    explicit CoolDown(float delay);
 
     void Update(const float& dt);
     bool IsAvailable();
     void ReloadCoolDown();
-    float GetCurrentCoolDown() { return coolDownLeft; };
-    float GetCoolDelay() { return coolDelay; };
+    float GetCurrentCoolDown() const { return cool_down_left_; };
+    float GetCoolDelay() const { return cool_delay_; };
 
 private:
-    float coolDownLeft;
-    float coolDelay;    
+    float cool_down_left_;
+    float cool_delay_;
 };

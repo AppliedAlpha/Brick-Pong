@@ -1,24 +1,22 @@
 #include "CoolDown.h"
 
-CoolDown::CoolDown(float delay) : coolDownLeft(delay), coolDelay(delay) { }
+CoolDown::CoolDown(float delay) : cool_down_left_(delay), cool_delay_(delay) { }
 
 void CoolDown::Update(const float& dt)
 {
-    if (coolDownLeft > 0.f)
+    if (cool_down_left_ > 0.f)
     {
-        coolDownLeft -= dt;
-        coolDownLeft = std::max(coolDownLeft, 0.f);
+        cool_down_left_ -= dt;
+        cool_down_left_ = std::max(cool_down_left_, 0.f);
     }
 }
 
 void CoolDown::ReloadCoolDown()
 {
-    coolDownLeft = coolDelay;
+    cool_down_left_ = cool_delay_;
 }
 
 bool CoolDown::IsAvailable()
 {
-    return coolDownLeft == 0.f;
+    return cool_down_left_ == 0.f;
 }
-
-

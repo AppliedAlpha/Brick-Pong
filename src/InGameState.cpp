@@ -6,26 +6,26 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
     this->font->loadFromFile("./resources/font/Arial.ttf");
 
     //Score System 초기화
-    this->scrSystem = new ScoreSystem();
+    this->scr_system = new ScoreSystem();
 
     // 공 초기화
-    this->ball = new Ball(20.f, 5.f, 1280, 720, scrSystem);
+    this->ball = new Ball(20.f, 5.f, 1280, 720, scr_system);
     
     //벽돌 초기화
     int rows = 8;
     int bricks_per_row = 3;
-    float Brick_x = 30.0f;
-    float Brick_y = 90.0f;
-    float Brick_itv = 10.0f;
-    float Brick_row_gap = 6.0f * Brick_x;
-    float total_height = rows * Brick_y + (rows - 1) * Brick_itv;
+    float brick_x = 30.0f;
+    float brick_y = 90.0f;
+    float brick_itv = 10.0f;
+    float brick_row_gap = 6.0f * brick_x;
+    float total_height = rows * brick_y + (rows - 1) * brick_itv;
     float start_y = (720 - total_height) / 2;
 
     for (int row = 0; row < rows; row++) {
         for (int i = 0; i < bricks_per_row; i++) {
-            float x = (1280 - (bricks_per_row * (Brick_x + Brick_row_gap) - Brick_row_gap)) / 2 + i * (Brick_x + Brick_row_gap);
-            float y = start_y + row * (Brick_y + Brick_itv);
-            bricks.push_back(new Brick(Brick_x, Brick_y, sf::Vector2f(x, y)));
+            float x = (1280 - (bricks_per_row * (brick_x + brick_row_gap) - brick_row_gap)) / 2 + i * (brick_x + brick_row_gap);
+            float y = start_y + row * (brick_y + brick_itv);
+            bricks.push_back(new Brick(brick_x, brick_y, sf::Vector2f(x, y)));
         }
     }
 
@@ -62,18 +62,18 @@ void InGameState::Update(const float& dt)
     this->CheckForQuit();
 
     // 공 움직임 처리
-    this->ball->move();
-    this->ball->checkCollisionWithWall();
+    this->ball->Move();
+    this->ball->CheckCollisionWithWall();
 
     //벽돌 구현부
-    this->ball->checkCollisionWithBrick(bricks);
+    this->ball->CheckCollisionWithBrick(bricks);
         
     // 플레이어
 	this->players.first->Update(dt);
     this->players.second->Update(dt);
 
 	// 공의 global bounds와 player의 충돌 확인
-	if (this->ball->getShape().getGlobalBounds().intersects(this->players.first->GetDrawable()->getGlobalBounds()))
+	if (this->ball->GetShape().getGlobalBounds().intersects(this->players.first->GetDrawable()->getGlobalBounds()))
 	{
         this->players.first->OnCollision(ball);
 	}
@@ -82,7 +82,7 @@ void InGameState::Update(const float& dt)
         this->players.first->ClearCollisionTrigger();
 	}
 
-    if (this->ball->getShape().getGlobalBounds().intersects(this->players.second->GetDrawable()->getGlobalBounds()))
+    if (this->ball->GetShape().getGlobalBounds().intersects(this->players.second->GetDrawable()->getGlobalBounds()))
     {
 		this->players.second->OnCollision(ball);
 	}
@@ -96,15 +96,15 @@ void InGameState::Render(sf::RenderTarget* target)
 {
     // 출력 대상 미지정 시 현재 화면으로 설정
     if (!target)
-        target = this->window;
+        target = this->window_;
 
     // target->draw(대상); 으로 렌더링하길 권장합니다.
 
     // 화면에 공 그리기
-    target->draw(this->ball->getShape());
+    target->draw(this->ball->GetShape());
 
     for (auto& brick : bricks) {
-        target->draw(brick->getShape());
+        target->draw(brick->GetShape());
     }
 
     // 플레이어 그리기
@@ -119,9 +119,9 @@ void InGameState::CheckForQuit()
 
     //득점 조건 달성 시 게임 종료
     int winner;
-    if(scrSystem->IsGameFinished(winner))
+    if(scr_system->IsGameFinished(winner))
     {
         this->winner_num = winner;
-        this->quit = true;
+        this->quit_ = true;
     }
 }

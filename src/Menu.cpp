@@ -2,8 +2,8 @@
 
 Menu::Menu(std::vector<std::string> vec)
 {   
-    this->font = new sf::Font();
-    this->font->loadFromFile("./resources/font/Arial.ttf");
+    this->font_ = new sf::Font();
+    this->font_->loadFromFile("./resources/font/Arial.ttf");
 
     this->menu.resize(vec.size());
 
@@ -11,69 +11,69 @@ Menu::Menu(std::vector<std::string> vec)
     {
         this->menu[i] = new sf::Text();
 
-        this->menu[i]->setFont(*(this->font));
-        this->menu[i]->setFillColor(i == selectedIndex ? sf::Color::Cyan : sf::Color::White);
+        this->menu[i]->setFont(*(this->font_));
+        this->menu[i]->setFillColor(i == selected_index_ ? sf::Color::Cyan : sf::Color::White);
         this->menu[i]->setCharacterSize(40.f);
         this->menu[i]->setString(vec[i]);
-        this->menu[i]->setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 360 + 75 * i, this->menu[i]->getLocalBounds().width));
+        this->menu[i]->setPosition(CustomMath::GetCenterPos(CustomMath::kCenter, 360 + 75 * i, this->menu[i]->getLocalBounds().width));
     }
 
-    selectedIndex = 0;
+    selected_index_ = 0;
 }
 
 Menu::~Menu() 
 {
-    delete this->font;
+    delete this->font_;
 
     for (auto item : this->menu)
         delete item;
 }
 
-void Menu::updateInput(const float& dt) 
+void Menu::UpdateInput(const float& dt)
 {
-    this->upDownCool.Update(dt);
+    this->up_down_cool_.Update(dt);
 
     bool pressed_up = sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
     bool pressed_down = sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 
-    if (this->upDownCool.IsAvailable())
+    if (this->up_down_cool_.IsAvailable())
     {
         if (pressed_up) {
-            this->moveUp();
-            this->upDownCool.ReloadCoolDown();
+            this->MoveUp();
+            this->up_down_cool_.ReloadCoolDown();
         }
         else if (pressed_down) {
-            this->moveDown();
-            this->upDownCool.ReloadCoolDown();
+            this->MoveDown();
+            this->up_down_cool_.ReloadCoolDown();
         }
     }
    
 }
-int Menu::checkEnterPressed() 
+int Menu::CheckEnterPressed()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
     {
-        return selectedIndex;
+        return selected_index_;
     }
     return -1;
 }
 
-void Menu::moveUp() 
+void Menu::MoveUp()
 {
-    if (selectedIndex - 1 >= 0) 
+    if (selected_index_ - 1 >= 0)
     {
-        menu[selectedIndex]->setFillColor(sf::Color::White);
-        selectedIndex--;
-        menu[selectedIndex]->setFillColor(sf::Color::Cyan);
+        menu[selected_index_]->setFillColor(sf::Color::White);
+        selected_index_--;
+        menu[selected_index_]->setFillColor(sf::Color::Cyan);
     }
 }
 
-void Menu::moveDown() 
+void Menu::MoveDown()
 {
-    if (selectedIndex + 1 < menu.size()) 
+    if (selected_index_ + 1 < menu.size())
     {
-        menu[selectedIndex]->setFillColor(sf::Color::White);
-        selectedIndex++;
-        menu[selectedIndex]->setFillColor(sf::Color::Cyan);
+        menu[selected_index_]->setFillColor(sf::Color::White);
+        selected_index_++;
+        menu[selected_index_]->setFillColor(sf::Color::Cyan);
     }
 }

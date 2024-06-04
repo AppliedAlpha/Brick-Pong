@@ -7,24 +7,24 @@ ScoreSystem::ScoreSystem()
 }
 
 // 소멸자
-ScoreSystem::~ScoreSystem() {}
+ScoreSystem::~ScoreSystem() = default;
 
 // 점수를 재설정하는 메서드
 void ScoreSystem::ResetScore() 
 {
-	scores = std::make_pair(0, 0);
+    scores_ = std::make_pair(0, 0);
 }
 
 // 특정 플레이어의 점수를 반환하는 메서드
-int ScoreSystem::GetScore(int player_number) 
+int ScoreSystem::GetScore(int player_number) const
 {
 	if (player_number == 1) 
 	{
-		return scores.first;
+		return scores_.first;
 	}
 	else if (player_number == 2) 
 	{
-		return scores.second;
+		return scores_.second;
 	}
 	else 
 	{
@@ -34,19 +34,19 @@ int ScoreSystem::GetScore(int player_number)
 }
 
 // 게임이 끝났는지 확인하는 메서드
-bool ScoreSystem::CheckGameFinish() {
-	return std::max(scores.first, scores.second) >= winning_score;
+bool ScoreSystem::CheckGameFinish() const {
+	return std::max(scores_.first, scores_.second) >= kWinningScore;
 }
 
 void ScoreSystem::AddScore(int player_number, int score)
 {
 	if (player_number == 1)
 	{
-		scores.first += score;
+        scores_.first += score;
 	}
 	else if (player_number == 2)
 	{
-		scores.second += score;
+        scores_.second += score;
 	}
 
 	CheckGameFinish();
@@ -63,11 +63,11 @@ bool ScoreSystem::IsGameFinished(int& winner)
 
 	if (ret)
 	{
-		if (scores.first >= winning_score)
+		if (scores_.first >= kWinningScore)
 		{
 			winner = 1;
 		}
-		else if (scores.second >= winning_score)
+		else if (scores_.second >= kWinningScore)
 		{
 			winner = 2;
 		}

@@ -17,21 +17,21 @@ public:
 	// sf::Sprite bgSprite;
 
 	Ball* ball;
-	ScoreSystem* scrSystem;
+	ScoreSystem* scr_system;
 	std::vector<Brick*> bricks;
 	std::pair<Player*, Player*> players;
 
 	int winner_num = -1;
 
-	InGameState(sf::RenderWindow* window);
-	virtual ~InGameState();
+	explicit InGameState(sf::RenderWindow* window);
+	~InGameState() override;
 
-	virtual void CheckForQuit();
+	void CheckForQuit() override;
 
-	int EndState();
-	void UpdateInput(const float& dt);
-	void Update(const float& dt);
-	void Render(sf::RenderTarget* target);
+	int EndState() override;
+	void UpdateInput(const float& dt) override;
+	void Update(const float& dt) override;
+	void Render(sf::RenderTarget* target) override;
 };
 
 

@@ -4,27 +4,24 @@
 State::State(sf::RenderWindow* window) 
 {
 	// 창 포인터 변수 및 나가기 플래그 변수 초기화
-	this->window = window;
-	this->quit = false;
+	this->window_ = window;
+	this->quit_ = false;
 }
 
 // State 소멸자
-State::~State()
-{
-
-}
+State::~State() = default;
 
 // 현재 State의 나가기 플래그 변수 상태를 반환하는 함수
 const bool& State::GetQuit() const 
 {
-	return this->quit;
+	return this->quit_;
 }
 
 void State::CheckForQuit() {
 	// 만약 ESC키를 누른 상태라면 나가기를 요청하도록 변수 설정
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		this->quit = true;
+		this->quit_ = true;
 	}
 }
 
@@ -57,5 +54,5 @@ void State::Render(sf::RenderTarget* target)
 {
 	// 출력하려는 창이 null이라면 현재 창으로 설정
 	if (!target)
-		target = this->window;
+		target = this->window_;
 }

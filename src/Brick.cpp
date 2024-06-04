@@ -2,19 +2,19 @@
 
 Brick::Brick::Brick(float width, float height, const sf::Vector2f& position)
 {
-	this->rect = new sf::RectangleShape(sf::Vector2f(width, height));//50.0f, 20.0f
+	this->rect_ = new sf::RectangleShape(sf::Vector2f(width, height));//50.0f, 20.0f
 
-	this->rect->setFillColor(sf::Color::White);
-	this->rect->setOutlineThickness(1.f);
-	this->rect->setOutlineColor(sf::Color::Black);
-	this->rect->setPosition(position);
-	this->rect->setOrigin(this->rect->getSize() / 2.f);
+	this->rect_->setFillColor(sf::Color::White);
+	this->rect_->setOutlineThickness(1.f);
+	this->rect_->setOutlineColor(sf::Color::Black);
+	this->rect_->setPosition(position);
+	this->rect_->setOrigin(this->rect_->getSize() / 2.f);
 
 }
 
-Brick::~Brick()
-{	
-	delete this->rect;
+Brick::~Brick() {
+    delete this->rect_;
+    this->rect_ = nullptr;
 }
 
 void Brick::Update(const float& dt)
@@ -29,22 +29,11 @@ void Brick::Update(const float& dt)
 
 sf::RectangleShape* Brick::GetDrawable()
 {
-	return this->rect;
+	return this->rect_;
 }
 
-void Brick::Clear()
-{
-	for (auto& object : objects)
-	{
-		if (typeid(*object) == typeid(Brick))
-			delete object;
-	}
-
-	objects.shrink_to_fit();
-}
-
-sf::RectangleShape& Brick::getShape() {
-	return *rect; // 공의 형태 반환
+sf::RectangleShape& Brick::GetShape() {
+	return *rect_; // 공의 형태 반환
 }
 
 

@@ -6,11 +6,11 @@ class State
 private:
 
 protected:
-	sf::RenderWindow* window;
-	bool quit;
+	sf::RenderWindow* window_;
+	bool quit_;
 
 public:
-	State(sf::RenderWindow* window);
+	explicit State(sf::RenderWindow* window);
 	virtual ~State();
 
 	const bool& GetQuit() const;

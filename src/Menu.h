@@ -5,20 +5,20 @@
 class Menu 
 {
 public:
-    Menu(std::vector<std::string> vec);
+    explicit Menu(std::vector<std::string> vec);
     ~Menu();
 
-    void updateInput(const float& dt);
-    void moveUp();
-    void moveDown();
-    int getSelectedIndex() { return selectedIndex; }
-    int checkEnterPressed();
+    void UpdateInput(const float& dt);
+    void MoveUp();
+    void MoveDown();
+    int GetSelectedIndex() const { return selected_index_; }
+    int CheckEnterPressed();
 
     std::vector<sf::Text*> menu;
 
 private:
-    int selectedIndex = 0;
+    int selected_index_ = 0;
     
-    CoolDown upDownCool = CoolDown(0.1f);
-    sf::Font* font;
+    CoolDown up_down_cool_ = CoolDown(0.1f);
+    sf::Font* font_;
 };

@@ -24,7 +24,7 @@ void TitleState::InitTexts()
     title_text.setCharacterSize(88);
     title_text.setFillColor(sf::Color::White);
     title_text.setString("Brick Pong");
-    title_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 150, title_text.getLocalBounds().width));
+    title_text.setPosition(CustomMath::GetCenterPos(CustomMath::kCenter, 150, title_text.getLocalBounds().width));
 
     std::vector<std::string> menu_text = {"Game Start", "Setting", "Exit Game"};
     title_menu = new Menu(menu_text);
@@ -32,22 +32,22 @@ void TitleState::InitTexts()
 
 int TitleState::EndState() 
 {
-    return this->exitMenuCode;
+    return this->exit_menu_code_;
 }
 
 void TitleState::UpdateInput(const float& dt) 
 {
-    this->title_menu->updateInput(dt);
-    this->enterCool.Update(dt);
+    this->title_menu->UpdateInput(dt);
+    this->enter_cool_.Update(dt);
 
-    if (this->enterCool.IsAvailable())
+    if (this->enter_cool_.IsAvailable())
     {
         int res;
 
         // 엔터를 감지했다면, 전환되거나 다음 State로 넘어가거나 해야함
-        if ((res = this->title_menu->checkEnterPressed()) != -1)
+        if ((res = this->title_menu->CheckEnterPressed()) != -1)
         {
-            this->enterCool.ReloadCoolDown();
+            this->enter_cool_.ReloadCoolDown();
 
             // 세팅은 없으니 무시
             if (res == 1)
@@ -55,8 +55,8 @@ void TitleState::UpdateInput(const float& dt)
                 return;
             }
 
-            this->exitMenuCode = res;
-            this->quit = true;
+            this->exit_menu_code_ = res;
+            this->quit_ = true;
         }
     }
 }
@@ -71,7 +71,7 @@ void TitleState::Render(sf::RenderTarget* target)
 {
     // 출력 대상 미지정 시 현재 화면으로 설정
     if (!target)
-        target = this->window;
+        target = this->window_;
 
     // 텍스트 렌더링
     target->draw(title_text);

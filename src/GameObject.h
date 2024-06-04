@@ -5,11 +5,10 @@
 class GameObject
 {
 protected:
-	static std::vector<GameObject*> objects;
-	sf::RectangleShape* rect;
+    sf::RectangleShape* rect_;
 
 	// 공과의 충돌을 검사합니다.
-	bool CheckCollision(sf::Vector2f otherPos, float radius);
+	bool CheckCollision(sf::Vector2f other_pos, float radius);
 
 public:
 	GameObject();
@@ -21,5 +20,4 @@ public:
 	virtual void UpdateInput(const float& dt);
 
 	virtual sf::RectangleShape* GetDrawable();
-	static void Clear();
 };

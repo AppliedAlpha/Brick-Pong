@@ -7,23 +7,23 @@ class TitleState : public State
 public:
 	sf::Font* font;
 	sf::Text title_text;
-	Menu* title_menu;
+	Menu* title_menu{};
 	// 일단 필요하지 않을 것 같아 주석 처리
 	// sf::Texture bgTexture;
 	// sf::Sprite bgSprite;
 
-	TitleState(sf::RenderWindow* window);
-	virtual ~TitleState();
+	explicit TitleState(sf::RenderWindow* window);
+	~TitleState() override;
 
 	void InitTexts();
 
-	int EndState();
-	void UpdateInput(const float& dt);
-	void Update(const float& dt);
-	void Render(sf::RenderTarget* target);
+	int EndState() override;
+	void UpdateInput(const float& dt) override;
+	void Update(const float& dt) override;
+	void Render(sf::RenderTarget* target) override;
 
 private:
-	CoolDown enterCool = CoolDown(0.5f);
-	int exitMenuCode = -1;
+	CoolDown enter_cool_ = CoolDown(0.5f);
+	int exit_menu_code_ = -1;
 };
 

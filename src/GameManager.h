@@ -8,14 +8,14 @@
 class GameManager 
 {
 private:
-	sf::RenderWindow* window;
-	sf::Event event;
-	sf::Image icon;
+	sf::RenderWindow* window_;
+	sf::Event event_;
+	sf::Image icon_;
 
-	sf::Clock dt_clock;
-	float dt;
+	sf::Clock dt_clock_;
+	float dt_;
 
-	std::deque<State*> states;
+	std::deque<State*> states_;
 	
 	void InitWindow();
 	void InitStates();
@@ -25,7 +25,7 @@ public:
 	virtual ~GameManager();
 
 	void UpdateDt();
-	void UpdateSFMLEvents();
+	void UpdateSfmlEvents();
 
 	void Update();
 	void Render();

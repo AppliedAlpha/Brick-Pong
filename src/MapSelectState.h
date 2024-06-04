@@ -11,12 +11,12 @@ public:
 	// sf::Texture bgTexture;
 	// sf::Sprite bgSprite;
 
-	MapSelectState(sf::RenderWindow* window);
-	virtual ~MapSelectState();
+	explicit MapSelectState(sf::RenderWindow* window);
+	~MapSelectState() override;
 
-	int EndState();
-	void UpdateInput(const float& dt);
-	void Update(const float& dt);
-	void Render(sf::RenderTarget* target);
+	int EndState() override;
+	void UpdateInput(const float& dt) override;
+	void Update(const float& dt) override;
+	void Render(sf::RenderTarget* target) override;
 };
 
