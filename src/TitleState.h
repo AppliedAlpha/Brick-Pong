@@ -4,8 +4,6 @@
 
 class TitleState : public State
 {
-private:
-
 public:
 	sf::Font* font;
 	sf::Text title_text;
@@ -23,5 +21,8 @@ public:
 	void UpdateInput(const float& dt);
 	void Update(const float& dt);
 	void Render(sf::RenderTarget* target);
+
+private:
+	CoolDown enterCool = CoolDown(0.5f);
 };
 

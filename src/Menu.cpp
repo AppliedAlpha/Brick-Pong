@@ -32,7 +32,6 @@ Menu::~Menu()
 void Menu::updateInput(const float& dt) 
 {
     this->upDownCool.Update(dt);
-    this->enterCool.Update(dt);
 
     bool pressed_up = sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
     bool pressed_down = sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down);

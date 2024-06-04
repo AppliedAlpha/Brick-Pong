@@ -39,11 +39,19 @@ void TitleState::UpdateInput(const float& dt)
 {
     this->title_menu->updateInput(dt);
 
-    int res;
-    // 엔터를 감지했다면, 전환되거나 다음 State로 넘어가거나 해야함
-    if ((res = this->title_menu->checkEnterPressed()) != -1)
+    this->enterCool.Update(dt);
+
+    if (this->enterCool.IsAvailable())
     {
-        std::cout << res;
+        int res;
+
+        // 엔터를 감지했다면, 전환되거나 다음 State로 넘어가거나 해야함
+        if ((res = this->title_menu->checkEnterPressed()) != -1)
+        {
+            std::cout << res;
+
+            this->enterCool.ReloadCoolDown();
+        }
     }
 }
 
