@@ -19,6 +19,7 @@ public:
 private:
     int selectedIndex = 0;
     
-    CoolDown upDownCool, enterCool;
+    CoolDown upDownCool = CoolDown(0.1f);
+    CoolDown enterCool = CoolDown(0.5f);
     sf::Font* font;
 };

@@ -1,10 +1,7 @@
 #include "Menu.h"
 
 Menu::Menu(std::vector<std::string> vec)
-{
-    this->upDownCool = CoolDown(0.1f);
-    this->enterCool = CoolDown(0.5f);
-    
+{   
     this->font = new sf::Font();
     this->font->loadFromFile("./resources/font/Arial.ttf");
 
