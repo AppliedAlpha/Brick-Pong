@@ -24,5 +24,6 @@ public:
 
 private:
 	CoolDown enterCool = CoolDown(0.5f);
+	int exitMenuCode = -1;
 };
 

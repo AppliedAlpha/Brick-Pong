@@ -32,7 +32,7 @@ void TitleState::InitTexts()
 
 int TitleState::EndState() 
 {
-    return 0;
+    return this->exitMenuCode;
 }
 
 void TitleState::UpdateInput(const float& dt) 
@@ -48,9 +48,16 @@ void TitleState::UpdateInput(const float& dt)
         // 엔터를 감지했다면, 전환되거나 다음 State로 넘어가거나 해야함
         if ((res = this->title_menu->checkEnterPressed()) != -1)
         {
-            std::cout << res;
-
             this->enterCool.ReloadCoolDown();
+
+            // 세팅은 없으니 무시
+            if (res == 1)
+            {
+                return;
+            }
+
+            this->exitMenuCode = res;
+            this->quit = true;
         }
     }
 }

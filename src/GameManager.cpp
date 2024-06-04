@@ -79,6 +79,14 @@ void GameManager::Update()
 			// 해당 State 종료를 위한 전처리 작업을 해줌
 			int res = this->states.front()->EndState();
 
+			// 종료된 State가 TitleState라면
+			if (TitleState* titleState = dynamic_cast<TitleState*>(this->states.front()))
+			{
+				// 타이틀에서 Start Game을 눌렀을 때 다음 장면을 게임으로 설정
+				if (res == 0)
+					this->states.push_back(new InGameState(this->window));
+			}
+
 			// 종료된 State가 InGameState라면
 			if (InGameState* inGameState = dynamic_cast<InGameState *>(this->states.front()))
 			{
