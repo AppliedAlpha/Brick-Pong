@@ -35,6 +35,17 @@ private:
 
 	// ==============FUNCTIONS================
 	void InitVariables();
+
+	/// <summary>
+	/// 공 위치와 플레이어 위치, 공의 속도, 곡률, 바의 길이를 이용하여 
+	/// 공의 새로운 속도 벡터를 계산합니다.
+	/// </summary>
+	/// <param name="ballPos">공의 중심좌표</param>
+	/// <param name="playerPos">player의 중심좌표</param>
+	/// <param name="ballVelocity">공의 속도</param>
+	/// <param name="curvature">곡률, 0일경우 회전이 존재하지 않으며, 최대 90일 경우 끝에 닿으면 수직으로 튑니다.</param>
+	/// <param name="barLength">Player bar의 길이</param>
+	/// <returns>계산된 공의 새로운 속도를 반환합니다. </returns>
 	sf::Vector2f CalculateCollisionVelocity(
 		sf::Vector2f ballPos,
 		sf::Vector2f playerPos,

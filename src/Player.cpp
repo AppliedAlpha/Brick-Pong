@@ -23,7 +23,11 @@ sf::Vector2f Player::CalculateCollisionVelocity(
 	double curvature,
 	double barLength
 ) {
+	bool ball_is_under_player = ballPos.y < playerPos.y;
+	bool cur_moving_right = ballVelocity.x > 0;
+
 	double dy = ballPos.y - playerPos.y;
+	if(dy < 0) dy *= -1;
 
 	double norm_dy = dy / (barLength * 0.5f);
 
@@ -31,8 +35,19 @@ sf::Vector2f Player::CalculateCollisionVelocity(
 
 	double magnitude = sqrt(pow(ballVelocity.x, 2) + pow(ballVelocity.y, 2));
 
-	double new_x = magnitude * cos(deflection_angle);
-	double new_y = magnitude * sin(deflection_angle);
+	double new_x, new_y;
+	if (ball_is_under_player) 
+	{
+		new_x = magnitude * sin(deflection_angle);
+		new_y = magnitude * -cos(deflection_angle);
+	}
+	else 
+	{
+		new_x = magnitude * sin(deflection_angle);
+		new_y = magnitude * cos(deflection_angle);
+	}
+
+	if (cur_moving_right) new_x *= -1;
 
 	return sf::Vector2f(new_x, new_y);
 }
@@ -63,15 +78,13 @@ void Player::OnCollision(Ball* other)
 	}
 	else
 	{
-		//newVelocity = CalculateCollisionVelocity(
-		//otherPos,
-		//curPos,
-		//newVelocity,
-		//PLAYER_CURVATURE,
-		//this->rect->getSize().y * 2
-		//);
-		
-		newVelocity.x *= -1;
+		newVelocity = CalculateCollisionVelocity(
+			otherPos,
+			curPos,
+			other->getVelocity(),
+			90,
+			this->rect->getSize().y
+		);
 	}
 
 	other->setVelocity(newVelocity);
