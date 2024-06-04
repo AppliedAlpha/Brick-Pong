@@ -1,7 +1,8 @@
 #pragma once
 #include "header/stdafx.h"
 
-class Menu {
+class Menu 
+{
 public:
     Menu(std::vector<std::string> vec);
     ~Menu();
