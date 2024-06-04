@@ -10,6 +10,7 @@ public:
     void moveUp();
     void moveDown();
     int getSelectedIndex() { return selectedIndex; }
+    int checkEnterPressed();
 
     std::vector<sf::Text*> menu;
 

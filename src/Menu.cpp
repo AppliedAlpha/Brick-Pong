@@ -60,6 +60,14 @@ void Menu::updateInput(const float& dt)
     }
    
 }
+int Menu::checkEnterPressed() 
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+    {
+        return selectedIndex;
+    }
+    return -1;
+}
 
 void Menu::moveUp() 
 {
