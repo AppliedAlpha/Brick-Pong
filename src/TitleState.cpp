@@ -38,7 +38,6 @@ int TitleState::EndState()
 void TitleState::UpdateInput(const float& dt) 
 {
     this->title_menu->updateInput(dt);
-
     this->enterCool.Update(dt);
 
     if (this->enterCool.IsAvailable())
