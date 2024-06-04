@@ -32,11 +32,27 @@ int ResultState::EndState()
 
 void ResultState::UpdateInput(const float& dt) 
 {
+    this->result_menu->updateInput(dt);
+    this->enterCool.Update(dt);
 
+    if (this->enterCool.IsAvailable())
+    {
+        int res;
+
+        // 엔터를 감지했다면, 전환되거나 다음 State로 넘어가거나 해야함
+        if ((res = this->result_menu->checkEnterPressed()) != -1)
+        {
+            this->enterCool.ReloadCoolDown();
+
+            this->exitMenuCode = res;
+            this->quit = true;
+        }
+    }
 }
 
 void ResultState::Update(const float& dt) 
 {
+    this->UpdateInput(dt);
     this->CheckForQuit();
 }
 
@@ -46,4 +62,7 @@ void ResultState::Render(sf::RenderTarget* target)
         target = this->window;
 
     target->draw(result_text);
+
+    for (auto menu_text : this->result_menu->menu)
+        target->draw(*menu_text);
 }

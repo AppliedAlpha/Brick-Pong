@@ -4,8 +4,6 @@
 
 class ResultState : public State
 {
-private:
-
 public:
 	sf::Font* font;
 	sf::Text result_text;
@@ -21,5 +19,9 @@ public:
 	void UpdateInput(const float& dt);
 	void Update(const float& dt);
 	void Render(sf::RenderTarget* target);
+
+private:
+	CoolDown enterCool = CoolDown(0.5f);
+	int exitMenuCode = -1;
 };
 
