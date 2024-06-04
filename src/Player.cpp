@@ -82,12 +82,17 @@ void Player::ClearCollisionTrigger()
 	collisionTrigger = false;
 }
 
-Player::Player()
+Player::Player(int playerNumber)
 {
+	this->playerNumber = playerNumber;
 	InitVariables();
 
 	this->rect = new sf::RectangleShape(sf::Vector2f(20.f, 70.f));
-	this->rect->setPosition(PLAYER_START_POS);
+	this->rect->setPosition(
+		playerNumber == 1 ?
+		PLAYER1_START_POS :
+		PLAYER2_START_POS
+	);
 }
 
 Player::~Player()
@@ -109,8 +114,8 @@ void Player::Update(const float& dt)
 
 void Player::UpdateInput(const float& dt)
 {
-	bool pressed_up = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-	bool pressed_down = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+	bool pressed_up = sf::Keyboard::isKeyPressed(playerNumber == 1 ? PLAYER1_UP_KEY : PLAYER2_UP_KEY);
+	bool pressed_down = sf::Keyboard::isKeyPressed(playerNumber == 1 ? PLAYER1_DOWN_KEY : PLAYER2_DOWN_KEY);
 
 	//Move player
 	if (pressed_up)

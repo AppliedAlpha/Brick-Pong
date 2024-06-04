@@ -4,21 +4,36 @@
 #include "Ball.h"
 
 //defines
-#define PLAYER_START_POS sf::Vector2f(1000, 360)
+// 1280, 720 기준으로 설정
+#define PLAYER1_START_POS sf::Vector2f(100, 360)
+#define PLAYER2_START_POS sf::Vector2f(1180, 360)
+
 #define PLAYER_ACCELERATION 20.f
 #define PLAYER_DECELERATION .9f
 #define PLAYER_MAX_SPEED 500.f
 #define PLAYER_CURVATURE 10.f
 
+//player_key_settings. 
+//if setting system is implemented, this should be moved to a separate file.
+#define PLAYER1_UP_KEY sf::Keyboard::Key::W
+#define PLAYER1_DOWN_KEY sf::Keyboard::Key::S
+
+#define PLAYER2_UP_KEY sf::Keyboard::Key::Up
+#define PLAYER2_DOWN_KEY sf::Keyboard::Key::Down
+
 class Player : public GameObject
 {
 private:
+	int playerNumber;
+
+	// ==============PHYSICS VARIABLES================
 	sf::Vector2f velocity;
 	float acceleration;
 	float deceleration;
 
 	float maxSpeed;
 
+	// ==============FUNCTIONS================
 	void InitVariables();
 	sf::Vector2f CalculateCollisionVelocity(
 		sf::Vector2f ballPos,
@@ -36,7 +51,7 @@ protected:
 	sf::RectangleShape* rect;
 
 public:
-	Player();
+	Player(int playerNumber);
 	Player(const Player& object) = delete;
 
 	virtual ~Player();
