@@ -160,7 +160,6 @@
     <ClCompile Include="src\ScoreSystem.cpp" />
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\TitleState.cpp" />
-    <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Ball.h" />
@@ -177,7 +176,6 @@
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\ScoreSystem.h" />
     <ClInclude Include="src\State.h" />
-    <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\TitleState.h" />
   </ItemGroup>
   <ItemGroup>

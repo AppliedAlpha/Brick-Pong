@@ -1,26 +1,19 @@
 #pragma once
 
 #include "header/stdafx.h"
-#include "Transform.h"
 #include "GameObject.h"
 #include <vector>
 
 class Brick : public GameObject
 {
-protected:
-	Transform* transform;
-	sf::RectangleShape* rect;
-
 public:
 	Brick(float width, float height, const sf::Vector2f& position);
 	Brick(const Brick& object) = delete;
 	
-	sf::RectangleShape& getShape();
+	sf::RectangleShape& GetShape();
 
-	virtual ~Brick();
+	~Brick() override;
 
-	virtual void Update(const float& dt) override;
-	virtual sf::RectangleShape* GetDrawable() override;
-
-	static void Clear();
+	void Update(const float& dt) override;
+	sf::RectangleShape* GetDrawable() override;
 };

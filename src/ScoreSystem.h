@@ -10,18 +10,17 @@
 class ScoreSystem 
 {
 private:
-	std::pair<int, int> scores;
-
-	const int winning_score = 5;
+	std::pair<int, int> scores_;
+	const int kWinningScore = 5;
 
 //	methods
-	bool CheckGameFinish();
+	bool CheckGameFinish() const;
 	void ResetScore();
 public:
 	ScoreSystem();
 	~ScoreSystem();
 	
 	void AddScore(int player_number, int score = 1);
-	int GetScore(int player_number);
+	int GetScore(int player_number) const;
 	bool IsGameFinished(int& winner);
 };
