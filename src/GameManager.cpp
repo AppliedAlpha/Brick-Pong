@@ -94,6 +94,17 @@ void GameManager::Update()
 				this->states.push_back(new ResultState(this->window, res));
 			}
 
+			// 종료된 State가 ResultState라면
+			if (ResultState* resultState = dynamic_cast<ResultState*>(this->states.front()))
+			{
+				// Retry, Back to Title을 눌렀을 때 다음 장면을 넣어줌
+				if (res == 0)
+					this->states.push_back(new InGameState(this->window));
+
+				else if (res == 1)
+					this->states.push_back(new TitleState(this->window));
+			}
+
 			// 해당 State의 포인터를 해제하고, 덱에서 제외시킴
 			delete this->states.front();
 			this->states.pop_front();

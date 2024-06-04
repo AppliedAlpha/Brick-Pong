@@ -21,13 +21,13 @@ void ResultState::InitTexts()
     result_text.setString("Player " + std::to_string(this->winner_num) + " Wins");
     result_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 150, result_text.getLocalBounds().width));
 
-    std::vector<std::string> menu_text = { "Retry", "Back to Menu" };
+    std::vector<std::string> menu_text = { "Retry", "Back to Title" };
     result_menu = new Menu(menu_text);
 }
 
 int ResultState::EndState() 
 {
-    return 0;
+    return this->exitMenuCode;
 }
 
 void ResultState::UpdateInput(const float& dt) 
