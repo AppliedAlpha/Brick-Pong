@@ -111,10 +111,8 @@ Player::Player(int playerNumber)
 Player::~Player()
 {
 	delete this->rect;
-	delete this->transform;
 
 	this->rect = nullptr;
-	this->transform = nullptr;
 
 	std::cout << "Player destroyed" << std::endl;
 }

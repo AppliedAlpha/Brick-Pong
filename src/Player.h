@@ -58,7 +58,6 @@ private:
 	bool collisionTrigger;
 
 protected:
-	Transform* transform;
 	sf::RectangleShape* rect;
 
 public:

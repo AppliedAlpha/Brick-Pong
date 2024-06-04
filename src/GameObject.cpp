@@ -1,5 +1,4 @@
 #include "GameObject.h"
-#include "Transform.h"
 #include <vector>
 #include <algorithm>
 
@@ -10,12 +9,6 @@ GameObject::GameObject()
 	// 생성된 모든 게임 오브젝트를 저장하는 벡터에 자신을 추가합니다.
 	objects.push_back(this);
 
-	// 게임 오브젝트의 위치, 크기, 회전을 관리하는 Transform을 생성합니다.
-	this->transform = new Transform();
-	this->transform->SetScale(sf::Vector2f(1.f, 1.f));
-	this->transform->SetPosition(sf::Vector2f(0.f, 0.f));
-	this->transform->SetRotation(0.f);
-
 	// 게임 오브젝트의 텍스처를 관리하는 사각형을 생성합니다.
 	this->rect = new sf::RectangleShape();
 
@@ -25,9 +18,6 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-	// 게임 오브젝트의 Transform을 삭제합니다.
-	delete this->transform;
-
 	// 게임 오븝젝트의 SpriteRenderer를 삭제합니다.
 	delete this->rect;
 

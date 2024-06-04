@@ -1,14 +1,12 @@
 #pragma once
 
 #include "header/stdafx.h"
-#include "Transform.h"
 #include "GameObject.h"
 #include <vector>
 
 class Brick : public GameObject
 {
 protected:
-	Transform* transform;
 	sf::RectangleShape* rect;
 
 public:

@@ -1,13 +1,11 @@
 #pragma once
 #include "header/stdafx.h"
-#include "Transform.h"
 #include <vector>
 
 class GameObject
 {
 protected:
 	static std::vector<GameObject*> objects;
-	Transform* transform;
 	sf::RectangleShape* rect;
 
 	// 공과의 충돌을 검사합니다.

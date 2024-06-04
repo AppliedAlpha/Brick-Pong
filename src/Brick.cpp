@@ -2,23 +2,18 @@
 
 Brick::Brick::Brick(float width, float height, const sf::Vector2f& position)
 {
-	this->transform = new Transform();
 	this->rect = new sf::RectangleShape(sf::Vector2f(width, height));//50.0f, 20.0f
 
 	this->rect->setFillColor(sf::Color::White);
 	this->rect->setOutlineThickness(1.f);
 	this->rect->setOutlineColor(sf::Color::Black);
-
-	this->transform->SetPosition(position);
-
-	this->rect->setPosition(this->transform->GetPosition());
+	this->rect->setPosition(position);
 	this->rect->setOrigin(this->rect->getSize() / 2.f);
 
 }
 
 Brick::~Brick()
 {	
-	delete this->transform;
 	delete this->rect;
 }
 
