@@ -39,7 +39,7 @@ void GameManager::InitStates()
 {
 	// State 덱에 새로운 State를 넣어줌
 	// TODO: InGameState 테스트 종료 시 TitleState로 변경
-	this->states.push_front(new InGameState(this->window));
+	this->states.push_front(new TitleState(this->window));
 }
 
 // 프레임마다 흐른 시각(dt, deltaTime)을 업데이트해줌
@@ -79,11 +79,30 @@ void GameManager::Update()
 			// 해당 State 종료를 위한 전처리 작업을 해줌
 			int res = this->states.front()->EndState();
 
+			// 종료된 State가 TitleState라면
+			if (TitleState* titleState = dynamic_cast<TitleState*>(this->states.front()))
+			{
+				// 타이틀에서 Start Game을 눌렀을 때 다음 장면을 게임으로 설정
+				if (res == 0)
+					this->states.push_back(new InGameState(this->window));
+			}
+
 			// 종료된 State가 InGameState라면
 			if (InGameState* inGameState = dynamic_cast<InGameState *>(this->states.front()))
 			{
 				// 종료 코드에서 받아온 승자를 ResultState로 넘김 
 				this->states.push_back(new ResultState(this->window, res));
+			}
+
+			// 종료된 State가 ResultState라면
+			if (ResultState* resultState = dynamic_cast<ResultState*>(this->states.front()))
+			{
+				// Retry, Back to Title을 눌렀을 때 다음 장면을 넣어줌
+				if (res == 0)
+					this->states.push_back(new InGameState(this->window));
+
+				else if (res == 1)
+					this->states.push_back(new TitleState(this->window));
 			}
 
 			// 해당 State의 포인터를 해제하고, 덱에서 제외시킴

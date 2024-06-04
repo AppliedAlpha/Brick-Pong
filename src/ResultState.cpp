@@ -21,29 +21,38 @@ void ResultState::InitTexts()
     result_text.setString("Player " + std::to_string(this->winner_num) + " Wins");
     result_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 150, result_text.getLocalBounds().width));
 
-    std::string menu_str[] = {"Retry", "Back to Menu"};
-    for (int i = 0; i < 2; ++i)
-    {
-        menu_text[i].setFont(*(this->font));
-        menu_text[i].setCharacterSize(48);
-        menu_text[i].setFillColor(sf::Color::White);
-        menu_text[i].setString(menu_str[i]);
-        menu_text[i].setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 360 + 90 * i, menu_text[i].getLocalBounds().width));
-    }
+    std::vector<std::string> menu_text = { "Retry", "Back to Title" };
+    result_menu = new Menu(menu_text);
 }
 
 int ResultState::EndState() 
 {
-    return 0;
+    return this->exitMenuCode;
 }
 
 void ResultState::UpdateInput(const float& dt) 
 {
+    this->result_menu->updateInput(dt);
+    this->enterCool.Update(dt);
 
+    if (this->enterCool.IsAvailable())
+    {
+        int res;
+
+        // 엔터를 감지했다면, 전환되거나 다음 State로 넘어가거나 해야함
+        if ((res = this->result_menu->checkEnterPressed()) != -1)
+        {
+            this->enterCool.ReloadCoolDown();
+
+            this->exitMenuCode = res;
+            this->quit = true;
+        }
+    }
 }
 
 void ResultState::Update(const float& dt) 
 {
+    this->UpdateInput(dt);
     this->CheckForQuit();
 }
 
@@ -54,6 +63,6 @@ void ResultState::Render(sf::RenderTarget* target)
 
     target->draw(result_text);
 
-    for (int i = 0; i < 2; ++i)
-        target->draw(menu_text[i]);
+    for (auto menu_text : this->result_menu->menu)
+        target->draw(*menu_text);
 }

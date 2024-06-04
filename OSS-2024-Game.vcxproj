@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -147,11 +147,13 @@
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Brick.cpp" />
+    <ClCompile Include="src\CoolDown.cpp" />
     <ClCompile Include="src\CustomFunction.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\InGameState.cpp" />
     <ClCompile Include="src\MapSelectState.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\ResultState.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -159,18 +161,18 @@
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\TitleState.cpp" />
     <ClCompile Include="src\Transform.cpp" />
-    <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\Brick.h" />
+    <ClInclude Include="src\CoolDown.h" />
     <ClInclude Include="src\CustomFunction.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\GameManager.h" />
     <ClInclude Include="src\header\stdafx.h" />
     <ClInclude Include="src\InGameState.h" />
     <ClInclude Include="src\MapSelectState.h" />
+    <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\ResultState.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\ScoreSystem.h" />
