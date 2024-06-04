@@ -21,15 +21,8 @@ void ResultState::InitTexts()
     result_text.setString("Player " + std::to_string(this->winner_num) + " Wins");
     result_text.setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 150, result_text.getLocalBounds().width));
 
-    std::string menu_str[] = {"Retry", "Back to Menu"};
-    for (int i = 0; i < 2; ++i)
-    {
-        menu_text[i].setFont(*(this->font));
-        menu_text[i].setCharacterSize(48);
-        menu_text[i].setFillColor(sf::Color::White);
-        menu_text[i].setString(menu_str[i]);
-        menu_text[i].setPosition(CustomMath::GetCenterPos(CustomMath::CENTER, 360 + 90 * i, menu_text[i].getLocalBounds().width));
-    }
+    std::vector<std::string> menu_text = { "Retry", "Back to Menu" };
+    result_menu = new Menu(menu_text);
 }
 
 int ResultState::EndState() 
@@ -53,7 +46,4 @@ void ResultState::Render(sf::RenderTarget* target)
         target = this->window;
 
     target->draw(result_text);
-
-    for (int i = 0; i < 2; ++i)
-        target->draw(menu_text[i]);
 }
