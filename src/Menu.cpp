@@ -2,6 +2,9 @@
 
 Menu::Menu(std::vector<std::string> vec)
 {
+    this->upDownCool = CoolDown(0.1f);
+    this->enterCool = CoolDown(0.5f);
+    
     this->font = new sf::Font();
     this->font->loadFromFile("./resources/font/Arial.ttf");
 
@@ -31,31 +34,21 @@ Menu::~Menu()
 
 void Menu::updateInput(const float& dt) 
 {
+    this->upDownCool.Update(dt);
+    this->enterCool.Update(dt);
+
     bool pressed_up = sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
     bool pressed_down = sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 
-    // std::cout << coolDown << std::endl;
-
-    // 현재 쿨다운 중이라면 (다음 입력 확인까지 대기 중이라면)
-    if (coolDown > 0.f) 
-    {
-        // 대기 시간 감소 (0초 미만으로 내려가지 않음)
-        coolDown -= dt;
-
-        if (coolDown < 0.f)
-            coolDown = 0.f;
-    }
-
-    // 키 누르기가 가능한 상태라면 확인
-    if (coolDown == 0.f) 
+    if (this->upDownCool.IsAvailable())
     {
         if (pressed_up) {
             this->moveUp();
-            coolDown = inputDelay;
+            this->upDownCool.ReloadCoolDown();
         }
         else if (pressed_down) {
             this->moveDown();
-            coolDown = inputDelay;
+            this->upDownCool.ReloadCoolDown();
         }
     }
    

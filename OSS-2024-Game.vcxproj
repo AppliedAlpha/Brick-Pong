@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Brick.cpp" />
+    <ClCompile Include="src\CoolDown.cpp" />
     <ClCompile Include="src\CustomFunction.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\Brick.h" />
+    <ClInclude Include="src\CoolDown.h" />
     <ClInclude Include="src\CustomFunction.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\GameManager.h" />

@@ -1,5 +1,6 @@
 #pragma once
 #include "header/stdafx.h"
+#include "CoolDown.h"
 
 class Menu 
 {
@@ -17,7 +18,7 @@ public:
 
 private:
     int selectedIndex = 0;
-    float coolDown = 0.1f;
-    const float inputDelay = 0.1f;
+    
+    CoolDown upDownCool, enterCool;
     sf::Font* font;
 };
