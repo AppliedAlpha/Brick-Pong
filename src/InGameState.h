@@ -19,8 +19,7 @@ public:
 	Ball* ball;
 	ScoreSystem* scrSystem;
 	std::vector<Brick*> bricks;
-	Player* player1;
-	Player* player2;
+	std::pair<Player*, Player*> players;
 
 	int winner_num = -1;
 

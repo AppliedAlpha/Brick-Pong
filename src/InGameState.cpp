@@ -31,8 +31,8 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
 
 
 	// GameObjects 초기화
-	this->player1 = new Player();
-
+    this->players.first = new Player(1);
+    this->players.second = new Player(2);
 }
 
 InGameState::~InGameState() 
@@ -52,7 +52,8 @@ int InGameState::EndState()
 
 void InGameState::UpdateInput(const float& dt) 
 {
-    player1->UpdateInput(dt);
+    this->players.first->UpdateInput(dt);
+    this->players.second->UpdateInput(dt);
 }
 
 void InGameState::Update(const float& dt) 
@@ -68,17 +69,27 @@ void InGameState::Update(const float& dt)
     this->ball->checkCollisionWithBrick(bricks);
         
     // 플레이어
-	player1->Update(dt);
+	this->players.first->Update(dt);
+    this->players.second->Update(dt);
 
 	// 공의 global bounds와 player의 충돌 확인
-	if (this->ball->getShape().getGlobalBounds().intersects(this->player1->GetDrawable()->getGlobalBounds()))
+	if (this->ball->getShape().getGlobalBounds().intersects(this->players.first->GetDrawable()->getGlobalBounds()))
 	{
-		this->player1->OnCollision(ball);
+        this->players.first->OnCollision(ball);
 	}
     else
 	{
-		this->player1->ClearCollisionTrigger();
+        this->players.first->ClearCollisionTrigger();
 	}
+
+    if (this->ball->getShape().getGlobalBounds().intersects(this->players.second->GetDrawable()->getGlobalBounds()))
+    {
+		this->players.second->OnCollision(ball);
+	}
+    else
+    {
+		this->players.second->ClearCollisionTrigger();
+    }
 }
 
 void InGameState::Render(sf::RenderTarget* target) 
@@ -95,7 +106,10 @@ void InGameState::Render(sf::RenderTarget* target)
     for (auto& brick : bricks) {
         target->draw(brick->getShape());
     }
-    target->draw(*this->player1->GetDrawable());
+
+    // 플레이어 그리기
+    target->draw(*this->players.first->GetDrawable());
+    target->draw(*this->players.second->GetDrawable());
 }
 
 void InGameState::CheckForQuit()

@@ -53,10 +53,10 @@ void ScoreSystem::AddScore(int player_number, int score)
 }
 
 /// <summary>
-/// Returns whether the game is over or not and the winner's number
+/// 게임 종료 여부와, 승자 플레이어의 번호를 반환합니다.
 /// </summary>
-/// <param name="winner">Winner's number by reference value</param>
-/// <returns>Returning Has Game Overred</returns>
+/// <param name="winner">승자의 번호를 Reference Value로 적용합니다. </param>
+/// <returns>게임 종료 여부를 반환합니다.</returns>
 bool ScoreSystem::IsGameFinished(int& winner)
 {
 	bool ret = CheckGameFinish();
