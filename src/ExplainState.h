@@ -5,8 +5,8 @@
 class ExplainState : public State
 {
 public:
-	// sf::Font* font;
-	// sf::Text title_text;
+	sf::Texture bg_texture;
+	sf::Sprite bg_sprite;
 
 	explicit ExplainState(sf::RenderWindow* window);
 	~ExplainState() override;

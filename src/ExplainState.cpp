@@ -2,7 +2,9 @@
 
 ExplainState::ExplainState(sf::RenderWindow* window) : State(window)
 {
-
+    // 설명 화면 이미지 불러오기
+    this->bg_texture.loadFromFile("./resources/image/explain.png");
+    this->bg_sprite.setTexture(this->bg_texture);
 }
 
 ExplainState::~ExplainState()
@@ -27,7 +29,6 @@ void ExplainState::UpdateInput(const float& dt)
             this->enter_cool_.ReloadCoolDown();
             this->quit_ = true;
         }
-        int res;
     }
 }
 
@@ -42,4 +43,6 @@ void ExplainState::Render(sf::RenderTarget* target)
 	// 출력 대상 미지정 시 현재 화면으로 설정
 	if (!target)
 		target = this->window_;
+
+    target->draw(bg_sprite);
 }
