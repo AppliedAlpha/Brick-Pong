@@ -26,7 +26,7 @@ void TitleState::InitTexts()
     title_text.setString("Brick Pong");
     title_text.setPosition(CustomMath::GetCenterPos(CustomMath::kCenter, 150, title_text.getLocalBounds().width));
 
-    std::vector<std::string> menu_text = {"Game Start", "Setting", "Exit Game"};
+    std::vector<std::string> menu_text = {"Game Start", "How To Play", "Exit Game"};
     title_menu = new Menu(menu_text);
 }
 
@@ -48,12 +48,6 @@ void TitleState::UpdateInput(const float& dt)
         if ((res = this->title_menu->CheckEnterPressed()) != -1)
         {
             this->enter_cool_.ReloadCoolDown();
-
-            // 세팅은 없으니 무시
-            if (res == 1)
-            {
-                return;
-            }
 
             this->exit_menu_code_ = res;
             this->quit_ = true;

@@ -4,6 +4,7 @@
 #include "TitleState.h"
 #include "InGameState.h"
 #include "ResultState.h"
+#include "ExplainState.h"
 
 class GameManager 
 {

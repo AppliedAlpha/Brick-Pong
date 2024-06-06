@@ -85,6 +85,9 @@ void GameManager::Update()
 				// 타이틀에서 Start Game을 눌렀을 때 다음 장면을 게임으로 설정
 				if (res == 0)
 					this->states_.push_back(new InGameState(this->window_));
+
+				else if (res == 1)
+					this->states_.push_back(new ExplainState(this->window_));
 			}
 
 			// 종료된 State가 InGameState라면
@@ -104,6 +107,10 @@ void GameManager::Update()
 				else if (res == 1)
 					this->states_.push_back(new TitleState(this->window_));
 			}
+
+			// 종료된 State가 ExplainState라면 다시 타이틀로 전환
+			if (dynamic_cast<ExplainState*>(this->states_.front()))
+				this->states_.push_back(new TitleState(this->window_));
 
 			// 해당 State의 포인터를 해제하고, 덱에서 제외시킴
 			delete this->states_.front();
