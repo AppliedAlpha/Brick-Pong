@@ -42,9 +42,6 @@
     <ClCompile Include="src\CustomFunction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\Transform.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -70,6 +67,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\CoolDown.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExplainState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,13 +113,13 @@
     <ClInclude Include="src\CoolDown.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="src\ExplainState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\font\Arial.ttf" />
     <ClInclude Include="src\GameObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\Player.h">
