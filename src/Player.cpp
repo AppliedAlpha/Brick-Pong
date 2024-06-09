@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Ball.h"
+#include "CustomFunction.h"
 
 void Player::InitVariables()
 {
@@ -17,74 +18,69 @@ void Player::InitVariables()
 }
 
 sf::Vector2f Player::CalculateCollisionVelocity(
-	sf::Vector2f ball_pos,
 	sf::Vector2f player_pos,
+	sf::Vector2f collision_pos,
 	sf::Vector2f ball_velocity,
 	double curvature,
-	double bar_length
-) {
-	bool ball_is_under_player = ball_pos.y < player_pos.y;
-	bool cur_moving_right = ball_velocity.x > 0;
+	double bar_length)
+{
+	// 1. 충돌 지점과 플레이어 중심 사이의 벡터 계산
+	double col_length = collision_pos.y - player_pos.y;
 
-	double dy = ball_pos.y - player_pos.y;
-	if(dy < 0) dy *= -1;
+	// 2. 충돌 지점이 바의 가장자리에 가까울수록 기울기 계산
+	double slope = 1.0 - std::abs(col_length - bar_length / 2.0) * curvature;
 
-	double norm_dy = dy / (bar_length * 0.5f);
+	// 3. 새로운 속도 벡터 계산
+	sf::Vector2f new_velocity = ball_velocity;
 
-	double deflection_angle = curvature * norm_dy;
+	// new velocity normalize
+	new_velocity.x = ball_velocity.x * slope;
+	new_velocity.y = -ball_velocity.y * slope;
 
-	double magnitude = sqrt(pow(ball_velocity.x, 2) + pow(ball_velocity.y, 2));
-
-	float new_x, new_y;
-	if (ball_is_under_player) 
-	{
-		new_x = magnitude * sin(deflection_angle);
-		new_y = magnitude * -cos(deflection_angle);
-	}
-	else 
-	{
-		new_x = magnitude * sin(deflection_angle);
-		new_y = magnitude * cos(deflection_angle);
-	}
-
-	if (cur_moving_right) new_x *= -1;
-
-	return {new_x, new_y};
+	new_velocity = CustomMath::GetLength(ball_velocity) * CustomMath::Normalize(new_velocity);
+	return new_velocity;
 }
+
 
 void Player::OnCollision(Ball* other)
 {
+	// 충돌이 발생했을 때 호출되는 함수입니다.
+	// 공과의 좌표 차이를 계산하여, 공의 속도를 직접 조절합니다.
 	if (collision_trigger_) {
 		//2중 연속 충돌 : 충돌 함수 무시
 		return;
 	}
     collision_trigger_ = true;
-	// 충돌이 발생했을 때 호출되는 함수입니다.
-	// 공과의 좌표 차이를 계산하여, 공의 속도를 직접 조절합니다.
 
-	// 공의 위치
-	sf::Vector2f other_pos = (other->GetShape()).getPosition();
-	sf::Vector2f cur_pos = this->rect_->getPosition();
+	sf::Vector2f col_position = sf::Vector2f(0, 0);
+	CustomMath::CheckCollision(
+		*this->rect_, other->GetShape(), col_position, other->GetVelocity()
+	);
 
 	
 
 	sf::Vector2f new_velocity = other->GetVelocity();
 
-	//세로로 충돌했을 경우
-	if (other_pos.y > cur_pos.y + this->rect_->getSize().y ||
-        other_pos.y < cur_pos.y - this->rect_->getSize().y)
+	//세로로 충돌했을 경우 : 사각형의 두 x안에 존재할 경우
+	if (col_position.x >= this->rect_->getPosition().x && col_position.x <= this->rect_->getPosition().x + this->rect_->getSize().x)
 	{
-        new_velocity.y *= -1;
+		//y값 반전
+		new_velocity.y = -new_velocity.y;
 	}
 	else
 	{
+		
         new_velocity = CalculateCollisionVelocity(
-                other_pos,
-                cur_pos,
+				this->rect_->getOrigin(),
+				col_position,
                 other->GetVelocity(),
-                90,
+                PLAYER_CURVATURE,
                 this->rect_->getSize().y
 		);
+		
+
+		//x값 반전
+		//new_velocity.x = -new_velocity.x;
 	}
 
     other->SetVelocity(new_velocity);
