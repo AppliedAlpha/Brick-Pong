@@ -53,14 +53,46 @@ void InGameState::InitTexts()
     // 게임 제목 텍스트 설정
     // 순서대로 폰트, 글자 크기, 색상, 메시지, 위치
     score_text.setFont(*(this->font));
-    score_text.setCharacterSize(88);
-    score_text.setFillColor(sf::Color::White);
-    std::string text = std::to_string(this->scr_system->GetScore(1));
-    text += " : ";
-    text += std::to_string(this->scr_system->GetScore(2));
-    score_text.setString(text);
-    score_text.setPosition(CustomMath::GetCenterPos(CustomMath::kCenter, 150, score_text.getLocalBounds().width));
+    score_p1.setFont(*(this->font));
+    score_p2.setFont(*(this->font));
 
+
+    score_text.setCharacterSize(88);
+    score_p1.setCharacterSize(88);
+    score_p2.setCharacterSize(88);
+
+
+    score_text.setFillColor(sf::Color::White);
+
+    if (this->scr_system->GetScore(1) >= 4)
+    {
+        score_p1.setFillColor(sf::Color::Red);
+    }
+    else
+    {
+        score_p1.setFillColor(sf::Color::White);
+    }
+
+    if (this->scr_system->GetScore(2) >= 4)
+    {
+        score_p2.setFillColor(sf::Color::Red);
+    }
+    else
+    {
+        score_p2.setFillColor(sf::Color::White);
+    }
+
+    score_p1.setString(std::to_string(this->scr_system->GetScore(1)));
+    score_text.setString(" : ");
+    score_p2.setString(std::to_string(this->scr_system->GetScore(2)));
+
+    // **포지션 수정**
+    float total_width = score_p1.getLocalBounds().width + score_text.getLocalBounds().width + score_p2.getLocalBounds().width;
+    float start_x = (1280 - total_width) / 2;
+
+    score_p1.setPosition(start_x, 150);
+    score_text.setPosition(start_x + score_p1.getLocalBounds().width, 150);
+    score_p2.setPosition(start_x + score_p1.getLocalBounds().width + score_text.getLocalBounds().width, 150);
 }
 
 
@@ -135,6 +167,8 @@ void InGameState::Render(sf::RenderTarget* target)
 
     // 스코어 출력하기
     target->draw(score_text);
+    target->draw(score_p1);
+    target->draw(score_p2);
 }
 
 void InGameState::CheckForQuit()
