@@ -33,6 +33,9 @@ InGameState::InGameState(sf::RenderWindow* window) : State(window)
 	// GameObjects 초기화
     this->players.first = new Player(1);
     this->players.second = new Player(2);
+
+    //스코어 출력을 위한 text 초기화
+    this->InitTexts();
 }
 
 InGameState::~InGameState() 
@@ -44,6 +47,22 @@ InGameState::~InGameState()
         delete brick;
     }
 }
+
+void InGameState::InitTexts()
+{
+    // 게임 제목 텍스트 설정
+    // 순서대로 폰트, 글자 크기, 색상, 메시지, 위치
+    score_text.setFont(*(this->font));
+    score_text.setCharacterSize(88);
+    score_text.setFillColor(sf::Color::White);
+    std::string text = std::to_string(this->scr_system->GetScore(1));
+    text += " : ";
+    text += std::to_string(this->scr_system->GetScore(2));
+    score_text.setString(text);
+    score_text.setPosition(CustomMath::GetCenterPos(CustomMath::kCenter, 150, score_text.getLocalBounds().width));
+
+}
+
 
 int InGameState::EndState() 
 {
@@ -90,6 +109,9 @@ void InGameState::Update(const float& dt)
     {
 		this->players.second->ClearCollisionTrigger();
     }
+
+    //스코어 업데이트
+    this->InitTexts();
 }
 
 void InGameState::Render(sf::RenderTarget* target) 
@@ -110,6 +132,9 @@ void InGameState::Render(sf::RenderTarget* target)
     // 플레이어 그리기
     target->draw(*this->players.first->GetDrawable());
     target->draw(*this->players.second->GetDrawable());
+
+    // 스코어 출력하기
+    target->draw(score_text);
 }
 
 void InGameState::CheckForQuit()
