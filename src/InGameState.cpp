@@ -62,15 +62,15 @@ void InGameState::InitTexts()
     score_p2.setCharacterSize(88);
 
 
-    score_text.setFillColor(sf::Color::White);
-
+    score_text.setFillColor(sf::Color(255, 255, 255, 50));
+    //스코어 4점 이상 부터 빨간색으로 
     if (this->scr_system->GetScore(1) >= 4)
     {
         score_p1.setFillColor(sf::Color::Red);
     }
     else
     {
-        score_p1.setFillColor(sf::Color::White);
+        score_p1.setFillColor(sf::Color(255, 255, 255, 50));
     }
 
     if (this->scr_system->GetScore(2) >= 4)
@@ -79,7 +79,7 @@ void InGameState::InitTexts()
     }
     else
     {
-        score_p2.setFillColor(sf::Color::White);
+        score_p2.setFillColor(sf::Color(255, 255, 255, 50));
     }
 
     score_p1.setString(std::to_string(this->scr_system->GetScore(1)));
@@ -89,10 +89,11 @@ void InGameState::InitTexts()
     // **포지션 수정**
     float total_width = score_p1.getLocalBounds().width + score_text.getLocalBounds().width + score_p2.getLocalBounds().width;
     float start_x = (1280 - total_width) / 2;
+    float spacing = 40.0f;
 
-    score_p1.setPosition(start_x, 150);
-    score_text.setPosition(start_x + score_p1.getLocalBounds().width, 150);
-    score_p2.setPosition(start_x + score_p1.getLocalBounds().width + score_text.getLocalBounds().width, 150);
+    score_p1.setPosition(start_x- spacing, 150);
+    score_text.setPosition(start_x + score_p1.getLocalBounds().width , 150);
+    score_p2.setPosition(start_x + score_p1.getLocalBounds().width + score_text.getLocalBounds().width + spacing, 150);
 }
 
 
