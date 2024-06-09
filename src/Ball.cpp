@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include "CustomFunction.h"
 
 // Ball 클래스 생성자
 Ball::Ball(float radius, float initial_speed, float screen_x, float screen_y, ScoreSystem* scrSystem)
@@ -13,8 +14,11 @@ Ball::Ball(float radius, float initial_speed, float screen_x, float screen_y, Sc
 // 공의 위치를 초기화하는 함수
 void Ball::ResetPosition() {
     shape_.setPosition(screen_x_ / 2 - shape_.getRadius(), screen_y_ / 2 - shape_.getRadius()); // 화면 중앙으로 위치 설정
-    speed_x_ = initial_speed_; // 초기 속도로 설정
-    speed_y_ = 0; // 초기 속도로 설정
+
+	// magnitude = _initialSpeed
+	float angle = CustomMath::GetRandomAngle(); // 랜덤한 각도 설정
+	speed_x_ = initial_speed_ * cos(angle); // x축 속도 설정
+	speed_y_ = initial_speed_ * sin(angle); // y축 속도 설정
 }
 
 // 공을 이동시키는 함수
@@ -42,12 +46,21 @@ void Ball::CheckCollisionWithWall() {
 
 // 공이 벽돌과 충돌하는지 확인하고 반응하는 함수
 void Ball::CheckCollisionWithBrick(std::vector<Brick*>& bricks) {  // 메서드 정의에서 & 추가
-    sf::FloatRect ballBounds = shape_.getGlobalBounds(); // 공의 경계 상자 가져오기
-    for (auto it = bricks.begin(); it != bricks.end(); ) {
-        if (ballBounds.intersects((*it)->GetShape().getGlobalBounds())) { // 공이 벽돌과 충돌 시
-            speed_x_ *= -1.001f; // x축 속도를 약간 증가시키며 반전
+	sf::Vector2f ball_pos = shape_.getOrigin(); // 공의 현재 위치 가져오기
 
-            // 충돌한 벽돌 삭제
+    for (auto it = bricks.begin(); it != bricks.end(); ) {
+		// 벽돌과 충돌 시, intersects 함수를 사용하여 충돌 여부 확인
+		if (shape_.getGlobalBounds().intersects((*it)->GetShape().getGlobalBounds())) {
+
+			if (ball_pos.x  >= (*it)->GetShape().getPosition().x &&
+                ball_pos.x <= (*it)->GetShape().getPosition().x + (*it)->GetShape().getSize().x) {
+				speed_y_ *= -1.0f; // y축 속도를 반전
+            }
+			else {
+				speed_x_ *= -1.0f; // x축 속도를 반전
+			}
+
+
             delete* it;
             it = bricks.erase(it);
         }

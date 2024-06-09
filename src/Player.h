@@ -11,7 +11,7 @@
 #define PLAYER_ACCELERATION 20.f
 #define PLAYER_DECELERATION .9f
 #define PLAYER_MAX_SPEED 500.f
-#define PLAYER_CURVATURE 10.f
+#define PLAYER_CURVATURE 90.f
 
 //player_key_settings. 
 //if setting system is implemented, this should be moved to a separate file.
@@ -47,8 +47,8 @@ private:
 	/// <param name="bar_length">Player bar의 길이</param>
 	/// <returns>계산된 공의 새로운 속도를 반환합니다. </returns>
 	static sf::Vector2f CalculateCollisionVelocity(
-		sf::Vector2f ball_pos,
 		sf::Vector2f player_pos,
+		sf::Vector2f collision_pos,
 		sf::Vector2f ball_velocity,
 
 		double curvature,
