@@ -12,6 +12,9 @@ private:
 
 public:
 	sf::Font* font;
+	sf::Text score_text;
+	sf::Text score_p1;
+	sf::Text score_p2;
 	// 일단 필요하지 않을 것 같아 주석 처리
 	// sf::Texture bgTexture;
 	// sf::Sprite bgSprite;
@@ -27,6 +30,7 @@ public:
 	~InGameState() override;
 
 	void CheckForQuit() override;
+	void InitTexts();
 
 	int EndState() override;
 	void UpdateInput(const float& dt) override;
