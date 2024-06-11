@@ -62,6 +62,7 @@ Visual Studio 컴파일러를 사용하여 C++ 언어로 개발하였으며, [SF
 
 ### O Jae O
 - [**@OruteZ**](https://github.com/OruteZ)
+- <dwd0102@sju.ac.kr>
 
 ### Hyeongjun Kim
 - [**@Kimhyeog**](https://github.com/Kimhyeog)
